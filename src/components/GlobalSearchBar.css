@@ -1,0 +1,128 @@
+.global-search {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.global-search__box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.global-search__box:focus-within {
+  border-color: var(--color-copper);
+}
+
+.global-search__box svg {
+  color: var(--color-ink-soft);
+  flex-shrink: 0;
+}
+
+.global-search__box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.92rem;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.global-search__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  padding: 10px 0;
+  max-height: 420px;
+  overflow-y: auto;
+  z-index: 60;
+}
+
+.global-search__hint {
+  padding: 12px 18px;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.global-search__group {
+  padding: 6px 0;
+}
+
+.global-search__group + .global-search__group {
+  border-top: 1px solid var(--color-border);
+}
+
+.global-search__group-title {
+  display: block;
+  padding: 4px 18px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-copper);
+}
+
+.global-search__result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 18px;
+  border: none;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+  gap: 2px;
+}
+
+.global-search__result:hover {
+  background: var(--color-bg-alt);
+}
+
+.global-search__result-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.global-search__result-snippet {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.global-search__see-all {
+  display: block;
+  text-align: center;
+  padding: 10px 18px 4px;
+  font-size: 0.85rem;
+  color: var(--color-copper);
+  text-decoration: none;
+  border-top: 1px solid var(--color-border);
+  margin-top: 6px;
+}
+
+.global-search__see-all:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .global-search__box {
+    padding: 8px 12px;
+  }
+  .global-search__box .btn {
+    display: none;
+  }
+}
