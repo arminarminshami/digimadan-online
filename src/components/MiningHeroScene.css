@@ -1,0 +1,19 @@
+.mining-hero-scene {
+  width: 100%;
+  height: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, #242220 0%, #1c1b19 100%);
+}
+
+.mining-hero-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 760px) {
+  .mining-hero-scene {
+    height: 220px;
+  }
+}

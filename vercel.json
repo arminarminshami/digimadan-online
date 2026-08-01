@@ -1,0 +1,53 @@
+{
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://gdafmztscwtqtjzgnhvp.supabase.co/functions/v1/sitemap"
+    },
+    {
+      "source": "/ads/:id",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(?i)(gptbot|oai-searchbot|chatgpt-user|oai-adsbot|claudebot|claude-user|claude-searchbot|anthropic-ai|perplexitybot|perplexity-user|bytespider|ccbot|meta-externalagent|cohere-ai|youbot|diffbot|amazonbot|bingbot|yandexbot|duckduckbot|baiduspider|applebot|facebookexternalhit|twitterbot|linkedinbot|telegrambot|whatsapp|discordbot).*"
+        }
+      ],
+      "destination": "/api/prerender?path=/ads/:id"
+    },
+    {
+      "source": "/articles/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(?i)(gptbot|oai-searchbot|chatgpt-user|oai-adsbot|claudebot|claude-user|claude-searchbot|anthropic-ai|perplexitybot|perplexity-user|bytespider|ccbot|meta-externalagent|cohere-ai|youbot|diffbot|amazonbot|bingbot|yandexbot|duckduckbot|baiduspider|applebot|facebookexternalhit|twitterbot|linkedinbot|telegrambot|whatsapp|discordbot).*"
+        }
+      ],
+      "destination": "/api/prerender?path=/articles/:slug"
+    },
+    {
+      "source": "/ads",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(?i)(gptbot|oai-searchbot|chatgpt-user|oai-adsbot|claudebot|claude-user|claude-searchbot|anthropic-ai|perplexitybot|perplexity-user|bytespider|ccbot|meta-externalagent|cohere-ai|youbot|diffbot|amazonbot|bingbot|yandexbot|duckduckbot|baiduspider|applebot|facebookexternalhit|twitterbot|linkedinbot|telegrambot|whatsapp|discordbot).*"
+        }
+      ],
+      "destination": "/api/prerender?path=/ads"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(?i)(gptbot|oai-searchbot|chatgpt-user|oai-adsbot|claudebot|claude-user|claude-searchbot|anthropic-ai|perplexitybot|perplexity-user|bytespider|ccbot|meta-externalagent|cohere-ai|youbot|diffbot|amazonbot|bingbot|yandexbot|duckduckbot|baiduspider|applebot|facebookexternalhit|twitterbot|linkedinbot|telegrambot|whatsapp|discordbot).*"
+        }
+      ],
+      "destination": "/api/prerender?path=/"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

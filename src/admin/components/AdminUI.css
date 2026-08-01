@@ -1,0 +1,358 @@
+.admin-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.admin-page-head__title {
+  font-size: 1.4rem;
+}
+
+.admin-page-head__desc {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.admin-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.status-pill--on {
+  background: #E7EFE4;
+  color: var(--color-sage);
+}
+
+.status-pill--off {
+  background: #EFEADC;
+  color: var(--color-ink-soft);
+}
+
+.status-pill--warn {
+  background: #FBEFE0;
+  color: var(--color-copper-dark);
+}
+
+.status-pill--sold {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.status-pill--danger {
+  background: #F7E3E1;
+  color: var(--color-danger);
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-start: 50%;
+  transform: translateX(50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+}
+
+.toast--success {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.toast--error {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+
+.toast button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.toast button:hover {
+  opacity: 1;
+}
+
+/* Admin data table */
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin-table th {
+  text-align: start;
+  color: var(--color-ink-soft);
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 10px 12px;
+  border-bottom: 1.5px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table__thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--color-bg-alt);
+}
+
+.admin-table__title {
+  font-weight: 700;
+  max-width: 220px;
+}
+
+.admin-table__reject-reason {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--color-danger);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-row-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  border-top: 3px solid var(--color-copper);
+}
+
+.stat-card__value {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.stat-card__label {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+@media (max-width: 760px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* فرم درون‌خطی (برای فرم‌های تاییدیه‌ی کوچک در جداول ادمین) */
+.admin-inline-form {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-inline-form input {
+  width: 140px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+.admin-inline-form input:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+
+/* وقتی کلاس مستقیماً روی خود input گذاشته می‌شود (مثل جدول حراج‌ها) */
+input.admin-inline-form {
+  width: 140px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+input.admin-inline-form:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+
+.admin-section-title {
+  font-size: 1.05rem;
+  margin: 8px 0 14px;
+  padding-top: 4px;
+}
+
+.admin-search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  max-width: 420px;
+}
+
+.admin-search-row input {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-size: 0.88rem;
+}
+
+.admin-search-row input:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+/* ---- کارت‌های «در انتظار بررسی» در داشبورد ---- */
+.admin-todo-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-todo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(194, 112, 61, 0.1);
+  border: 1.5px solid var(--color-copper);
+  text-decoration: none;
+  min-width: 160px;
+}
+
+.admin-todo-card__value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-copper);
+}
+
+.admin-todo-card__label {
+  font-size: 0.82rem;
+  color: var(--color-ink);
+}
+
+/* ---- دکمه‌های دسترسی سریع ---- */
+.admin-quick-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---- ردیف فیلتر ---- */
+.admin-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+/* ---- ستون پاسخ سرویس در گزارش پیامک ---- */
+.admin-sms-log__response {
+  display: inline-block;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  vertical-align: middle;
+}
+
+@media (max-width: 720px) {
+  .admin-sms-log__response {
+    max-width: 55vw;
+  }
+  .admin-quick-actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+  .admin-todo-card {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+}
+
+/* ---- ستون «ثبت‌کننده» در جدول آگهی‌ها ---- */
+.admin-owner-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-owner-cell__name {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.admin-owner-cell__phone {
+  font-size: 0.78rem;
+  color: var(--color-copper);
+  text-decoration: none;
+  direction: ltr;
+  text-align: start;
+}
+
+.admin-owner-cell__admin {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
