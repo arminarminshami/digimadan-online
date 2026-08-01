@@ -1,0 +1,342 @@
+:root {
+  /* Color tokens */
+  --color-bg: #F6F3EC;
+  --color-bg-alt: #EFEADC;
+  --color-ink: #211F1C;
+  --color-ink-soft: #5B564C;
+  --color-charcoal: #1C1B19;
+  --color-copper: #C2703D;
+  --color-copper-dark: #A35A2C;
+  --color-sage: #5C7A52;
+  --color-border: #DDD6C7;
+  --color-white: #FFFFFF;
+  --color-danger: #B23A32;
+
+  /* Strata band colors (signature element) */
+  --strata-1: #C2703D;
+  --strata-2: #8B8268;
+  --strata-3: #5C7A52;
+  --strata-4: #1C1B19;
+
+  /* Type */
+  --font-base: 'Vazirmatn', Tahoma, sans-serif;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(28, 27, 25, 0.06);
+  --shadow-md: 0 4px 16px rgba(28, 27, 25, 0.08);
+  --shadow-lg: 0 12px 32px rgba(28, 27, 25, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom, brand-colored scrollbar for a more polished, intentional feel while scrolling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-copper) var(--color-bg-alt);
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-copper);
+  border-radius: 999px;
+  border: 2.5px solid var(--color-bg-alt);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-copper-dark);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  direction: rtl;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-copper);
+  outline-offset: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Signature strata divider */
+.strata-line {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--strata-1) 0%,
+    var(--strata-1) 25%,
+    var(--strata-2) 25%,
+    var(--strata-2) 55%,
+    var(--strata-3) 55%,
+    var(--strata-3) 78%,
+    var(--strata-4) 78%,
+    var(--strata-4) 100%
+  );
+  border-radius: 999px;
+}
+
+.strata-line--thin {
+  height: 3px;
+}
+
+/* Shared button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-copper);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-copper-dark);
+}
+
+.btn-dark {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.btn-dark:hover {
+  background: #000;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-ink);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-copper);
+  color: var(--color-copper-dark);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Section spacing */
+.section {
+  padding: 36px 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-copper-dark);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 1.6rem;
+}
+
+.section-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-copper-dark);
+  white-space: nowrap;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 24px 0;
+  }
+}
+
+/* ============================================================
+   Depth scroll reveal — sections rise out of the "rock" as you
+   scroll to them, tilting back level like settling strata.
+   Respects prefers-reduced-motion (handled in useDepthReveal.js,
+   which skips the hidden state entirely for those users).
+   ============================================================ */
+
+.depth-section {
+  --depth-amount: 1;
+  opacity: 0;
+  transform:
+    perspective(1400px)
+    translateY(calc(70px * var(--depth-amount)))
+    translateZ(calc(-90px * var(--depth-amount)))
+    rotateX(calc(8deg * var(--depth-amount)));
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.depth-section--revealed {
+  opacity: 1;
+  transform: perspective(1400px) translateY(0) translateZ(0) rotateX(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* A thin strata band that sits between sections, picking up the
+   same rock-layer palette as .strata-line, reinforcing the
+   "descending through earth" feeling as the page scrolls. */
+.strata-seam {
+  position: relative;
+  height: 22px;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.strata-seam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(194, 112, 61, 0.08) 35%,
+    rgba(92, 122, 82, 0.08) 65%,
+    transparent 100%
+  );
+}
+
