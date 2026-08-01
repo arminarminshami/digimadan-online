@@ -1,0 +1,299 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ---------------- نوار بالای صفحه (فقط موبایل) ---------------- */
+.admin-topbar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.admin-topbar__burger,
+.admin-topbar__site {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.admin-topbar__title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.admin-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+}
+
+/* ---------------- سایدبار ---------------- */
+.admin-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--color-charcoal);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  padding: 22px 20px;
+  border-bottom: 1px solid #34322d;
+}
+
+.admin-sidebar__brand-mark {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.admin-sidebar__close {
+  display: none;
+  margin-inline-start: auto;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.admin-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 12px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.admin-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #b5b0a2;
+}
+
+.admin-sidebar__link:hover {
+  background: #28261f;
+  color: var(--color-white);
+}
+
+.admin-sidebar__link--active {
+  background: var(--color-copper);
+  color: var(--color-white);
+}
+
+.admin-sidebar__footer {
+  padding: 16px;
+  border-top: 1px solid #34322d;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-sidebar__view-site {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #b5b0a2;
+}
+
+.admin-sidebar__view-site:hover {
+  color: var(--color-copper);
+}
+
+.admin-sidebar__user {
+  font-size: 0.78rem;
+  color: #8b8678;
+  word-break: break-all;
+}
+
+.admin-sidebar .btn-outline {
+  border-color: #4a473f;
+  color: var(--color-white);
+}
+
+.admin-main {
+  flex: 1;
+  padding: 28px 32px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ---------------- موبایل: سایدبار به کشوی کناری تبدیل می‌شود ---------------- */
+@media (max-width: 860px) {
+  .admin-layout {
+    display: block; /* در موبایل چیدمان ستونی flex لازم نیست و باعث فشردگی می‌شد */
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .admin-topbar {
+    display: flex;
+    /* رعایت ناحیه‌ی امن بالای صفحه در آیفون‌های دارای ناچ */
+    padding-top: calc(10px + env(safe-area-inset-top));
+    padding-inline-start: calc(14px + env(safe-area-inset-left));
+    padding-inline-end: calc(14px + env(safe-area-inset-right));
+  }
+
+  /*
+    نکته‌ی مهم: از خاصیت فیزیکی right استفاده می‌شود، نه inset-inline-end.
+    در چیدمان راست‌به‌چپ، inline-end به لبه‌ی چپ اشاره می‌کند در حالی که
+    transform همیشه فیزیکی است؛ ترکیب این دو باعث می‌شد کشو به‌جای بیرون
+    صفحه، وسط صفحه بایستد و روی محتوا بیفتد.
+  */
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: min(300px, 86vw);
+    height: 100dvh;
+    z-index: 60;
+    transform: translateX(100%);
+    transition: transform 0.24s ease;
+    box-shadow: -8px 0 28px rgba(0, 0, 0, 0.32);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .admin-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .admin-sidebar__brand {
+    padding: 16px 18px;
+  }
+
+  .admin-sidebar__close {
+    display: block;
+  }
+
+  .admin-drawer-backdrop {
+    display: block;
+    z-index: 55;
+  }
+
+  .admin-main {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 14px calc(40px + env(safe-area-inset-bottom));
+    padding-inline-start: calc(14px + env(safe-area-inset-left));
+    padding-inline-end: calc(14px + env(safe-area-inset-right));
+  }
+}
+
+/* ---------------- موبایل: جدول‌ها به کارت تبدیل می‌شوند ---------------- */
+@media (max-width: 720px) {
+  .admin-table-wrap {
+    border: none;
+    background: transparent;
+  }
+
+  .admin-table thead {
+    display: none;
+  }
+
+  .admin-table,
+  .admin-table tbody,
+  .admin-table tr,
+  .admin-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-table tr {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    padding: 12px 14px;
+  }
+
+  .admin-table td {
+    border: none;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    text-align: start;
+  }
+
+  /* عنوان ستون از data-label گرفته می‌شود تا در موبایل هم معلوم باشد */
+  .admin-table td::before {
+    content: attr(data-label);
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .admin-table td:empty {
+    display: none;
+  }
+
+  .admin-table__title {
+    max-width: none;
+    font-size: 0.95rem;
+  }
+
+  .admin-row-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .admin-page-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-search-row {
+    max-width: none;
+  }
+
+  .ad-form__grid,
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table__thumb {
+    width: 56px;
+    height: 56px;
+  }
+}

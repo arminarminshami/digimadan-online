@@ -1,0 +1,59 @@
+.jalali-date-select {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 6px;
+}
+
+.jalali-date-select select {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--color-ink);
+  background: var(--color-white);
+}
+
+.jalali-date-select select:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+
+.jalali-datetime {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.jalali-datetime > .jalali-date-select {
+  flex: 1 1 240px;
+}
+
+.jalali-datetime__time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.jalali-datetime__time select {
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-family: inherit;
+  font-size: 0.92rem;
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.jalali-datetime__colon {
+  font-weight: 800;
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 640px) {
+  .jalali-datetime > .jalali-date-select {
+    flex: 1 1 100%;
+  }
+}

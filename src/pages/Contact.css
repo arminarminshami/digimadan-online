@@ -1,0 +1,126 @@
+.contact-page {
+  padding: 48px 20px 64px;
+}
+
+.contact-page .section-title {
+  margin-top: 8px;
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+
+.contact-page__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+}
+
+.contact-page__custom {
+  color: var(--color-ink-soft);
+  margin-bottom: 22px;
+  white-space: pre-wrap;
+  line-height: 1.9;
+}
+
+.contact-page__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 26px;
+  box-shadow: 0 8px 18px -8px rgba(37, 211, 102, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-page__whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px -8px rgba(37, 211, 102, 0.6);
+  color: #ffffff;
+}
+
+.contact-page__whatsapp-icon {
+  display: inline-flex;
+}
+
+.contact-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.contact-page__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 10px;
+}
+
+.contact-page__list-label {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  font-weight: 600;
+}
+
+.contact-page__list a {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.contact-page__list a:hover {
+  color: var(--color-copper-dark);
+}
+
+.contact-page__phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.contact-page__card {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.contact-page__card h3 {
+  margin: 14px 0 12px;
+  font-size: 1.05rem;
+}
+
+.contact-page__bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #C9C5B9;
+  font-size: 0.92rem;
+}
+
+.contact-page__bullets li {
+  padding-right: 16px;
+  position: relative;
+}
+
+.contact-page__bullets li::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-copper);
+}
+
+@media (max-width: 760px) {
+  .contact-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
