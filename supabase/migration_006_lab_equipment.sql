@@ -1,0 +1,4 @@
+-- تجهیزات آزمایشگاهی — این مایگریشن قبلاً روی Supabase اعمال شده است (فقط برای ثبت در مخزن).
+-- جداول: lab_holdings, lab_holding_companies, lab_equipment + باکت عمومی lab-equipment
+-- RLS: خواندن برای همه، نوشتن فقط is_admin().
+-- ستون brochure_images به lab_holdings اضافه شده است.
