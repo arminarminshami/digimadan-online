@@ -1,0 +1,318 @@
+.submit-ad-page {
+  padding: 32px 20px 64px;
+  max-width: 800px;
+}
+
+.submit-ad__subtitle {
+  color: var(--color-ink-soft);
+  margin-bottom: 24px;
+}
+
+.submit-ad__error {
+  color: var(--color-danger);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.submit-ad__gate {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  text-align: center;
+  max-width: 480px;
+  margin: 48px auto;
+}
+
+.submit-ad__gate h1 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.submit-ad__gate p {
+  color: var(--color-ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.submit-ad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.submit-ad-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.submit-ad-form textarea {
+  resize: vertical;
+}
+
+/* فیلد فرم — مستقل از استایل پنل ادمین، چون این صفحه عمومی است */
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  padding: 11px 13px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 400;
+  background: var(--color-white);
+  color: var(--color-ink);
+  width: 100%;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+
+@media (max-width: 640px) {
+  .submit-ad-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- استپر سه‌مرحله‌ای ---- */
+.ad-stepper {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  gap: 8px;
+}
+
+.ad-stepper__step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  position: relative;
+}
+
+.ad-stepper__step::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  z-index: 0;
+}
+
+.ad-stepper__step:first-child::before {
+  display: none;
+}
+
+.ad-stepper__step--done::before {
+  background: var(--color-copper);
+}
+
+.ad-stepper__circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  color: var(--color-ink-soft);
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.ad-stepper__step--active .ad-stepper__circle {
+  border-color: var(--color-copper);
+  color: var(--color-copper);
+}
+
+.ad-stepper__step--done .ad-stepper__circle {
+  background: var(--color-copper);
+  border-color: var(--color-copper);
+  color: var(--color-white);
+}
+
+.ad-stepper__label {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  font-weight: 600;
+}
+
+.ad-stepper__step--active .ad-stepper__label {
+  color: var(--color-ink);
+}
+
+/* ---- انتخاب نوع آگهی: فروش یا خرید ---- */
+.ad-type-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.ad-type-toggle__btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-ink-soft);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.ad-type-toggle__btn--active {
+  border-color: var(--color-copper);
+  background: rgba(194, 112, 61, 0.08);
+  color: var(--color-copper);
+}
+
+/* ---- دکمه‌های ناوبری مراحل ---- */
+.ad-step-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.ad-step-actions--split {
+  justify-content: space-between;
+}
+
+/* ---- آپلود فایل آنالیز ---- */
+.analysis-uploader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.analysis-uploader input[type='file'] {
+  display: none;
+}
+
+.analysis-uploader__file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: var(--color-bg-alt);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.analysis-uploader__file button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+  line-height: 1;
+}
+
+/* ---- بنر رد شدن آگهی ---- */
+.rejection-banner {
+  background: #fdecea;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+}
+
+.rejection-banner strong {
+  color: var(--color-danger);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.rejection-banner p {
+  margin: 0 0 6px;
+  color: var(--color-ink);
+}
+
+.rejection-banner span {
+  color: var(--color-ink-soft);
+  font-size: 0.8rem;
+}
+
+/* ---- خلاصه‌ی آگهی در مرحله‌ی تایید ---- */
+.review-summary {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin-bottom: 8px;
+}
+
+.review-summary h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.review-summary dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  margin: 0;
+}
+
+.review-summary dl > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.review-summary dt {
+  font-size: 0.76rem;
+  color: var(--color-ink-soft);
+}
+
+.review-summary dd {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .review-summary dl {
+    grid-template-columns: 1fr;
+  }
+  .ad-stepper__label {
+    font-size: 0.68rem;
+  }
+}
+
+/* ---- انتخابگر دسته‌بندی (اولین گام ثبت آگهی) ---- */
+.category-picker {
+  max-width: 420px;
+}
+
+.category-picker select {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 14px;
+}
+
+.category-picker__hint {
+  margin-top: 10px;
+}

@@ -1,0 +1,59 @@
+.price-ticker {
+  background: var(--color-charcoal);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+}
+
+.price-ticker__track {
+  display: inline-flex;
+  animation: price-ticker-scroll 90s linear infinite;
+}
+
+@keyframes price-ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.price-ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 20px;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.price-ticker__label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.price-ticker__value {
+  font-weight: 700;
+  color: var(--color-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.price-ticker__value--up::after {
+  content: ' ▲';
+  color: var(--color-sage);
+  font-size: 0.7rem;
+}
+
+.price-ticker__value--down::after {
+  content: ' ▼';
+  color: #D9776B;
+  font-size: 0.7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .price-ticker__track {
+    animation: none;
+    overflow-x: auto;
+  }
+}

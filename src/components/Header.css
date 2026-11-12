@@ -1,0 +1,447 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 24px);
+  min-height: 72px;
+}
+
+/* هدر برای جا شدن منوی کامل، از کانتینر عمومی عریض‌تر است */
+.site-header__bar.container {
+  max-width: 1560px;
+  padding-inline: 24px;
+}
+
+.site-header__brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.site-header__brand {
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--color-charcoal);
+}
+
+.site-header__brand-mark {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.site-header__nav--desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: clamp(10px, 1.6vw, 26px);
+}
+
+.site-header__link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-header__link:hover {
+  color: var(--color-ink);
+}
+
+.site-header__link--active {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-copper);
+}
+
+/* «تجهیزات آزمایشگاهی» در دو سطر نوشته می‌شود */
+.site-header__link--two-line {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+  font-size: 0.86rem;
+}
+
+.site-header__cta {
+  white-space: nowrap;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.site-header__account {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-header__login-btn {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   منوی کشویی شیشه‌ای (دسکتاپ)
+   ------------------------------------------------------------ */
+.nav-dd {
+  position: relative;
+}
+
+.nav-dd__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.nav-dd__chev {
+  transition: transform 0.25s ease;
+  opacity: 0.7;
+}
+
+.nav-dd--open .nav-dd__chev {
+  transform: rotate(180deg);
+}
+
+.nav-dd--open > .nav-dd__trigger {
+  color: var(--color-ink);
+}
+
+/* padding-top یک «پل» نامرئی است تا موس هنگام رفتن به پنل، منو را نبندد */
+.nav-dd__panel-wrap {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  min-width: 290px;
+  padding-top: 14px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  z-index: 60;
+}
+
+.nav-dd--open .nav-dd__panel-wrap {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.nav-dd__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(255, 252, 246, 0.95);
+  border: 1px solid rgba(194, 112, 61, 0.28);
+  box-shadow:
+    0 22px 44px -14px rgba(28, 27, 25, 0.38),
+    0 4px 12px rgba(28, 27, 25, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-dd__panel {
+    background: rgba(255, 252, 246, 0.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    backdrop-filter: blur(20px) saturate(1.5);
+  }
+}
+
+/* فلش کوچک بالای پنل */
+.nav-dd__panel::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  transform: translateX(-50%) rotate(45deg);
+  background: rgba(255, 252, 246, 0.9);
+  border-top: 1px solid rgba(194, 112, 61, 0.28);
+  border-left: 1px solid rgba(194, 112, 61, 0.28);
+  border-top-left-radius: 4px;
+}
+
+/* خط رنگی لایه‌ای (هم‌خوان با هویت سایت) بالای پنل */
+.nav-dd__panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--strata-1) 0%,
+    var(--strata-1) 34%,
+    var(--strata-2) 34%,
+    var(--strata-2) 66%,
+    var(--strata-3) 66%,
+    var(--strata-3) 100%
+  );
+  opacity: 0.85;
+}
+
+.nav-dd__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  color: var(--color-ink);
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.nav-dd__item:hover,
+.nav-dd__item:focus-visible {
+  background: linear-gradient(270deg, rgba(194, 112, 61, 0.16), rgba(194, 112, 61, 0.04));
+  transform: translateX(-3px);
+  outline: none;
+}
+
+.nav-dd__item--active {
+  background: rgba(194, 112, 61, 0.12);
+}
+
+.nav-dd__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: rgba(194, 112, 61, 0.13);
+  color: var(--color-copper-dark);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.nav-dd__item:hover .nav-dd__icon,
+.nav-dd__item:focus-visible .nav-dd__icon {
+  background: var(--color-copper);
+  color: var(--color-white);
+}
+
+.nav-dd__icon--sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+}
+
+.nav-dd__icon--sm svg {
+  width: 15px;
+  height: 15px;
+}
+
+.nav-dd__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.nav-dd__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-dd__hint {
+  font-size: 0.72rem;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   موبایل: همبرگر فقط در گوشی
+   ------------------------------------------------------------ */
+.site-header__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+
+.site-header__burger span {
+  display: block;
+  height: 2px;
+  margin: 0 7px;
+  background: var(--color-ink);
+}
+
+.site-header__nav--mobile {
+  display: none;
+}
+
+.site-header__mobile-auth {
+  display: none;
+}
+
+/* تبلت و لپ‌تاپ کوچک: متن کنار لوگو کم می‌شود تا منو جا شود */
+@media (max-width: 1100px) {
+  .site-header__brand-text {
+    display: none;
+  }
+  .site-header__nav--desktop {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header__nav--desktop {
+    display: none;
+  }
+  .site-header__actions {
+    display: none;
+  }
+  .site-header__bar {
+    justify-content: space-between;
+    padding-block: 8px;
+  }
+  .site-header__burger {
+    display: flex;
+  }
+  .site-header__nav--mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 20px 18px;
+    gap: 2px;
+    border-top: 1px solid var(--color-border);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+  .site-header__nav--mobile .site-header__link {
+    padding: 11px 4px;
+    border-bottom: none;
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+  .site-header__mobile-auth {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .site-header__mobile-account {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .site-header__mobile-account,
+  .site-header__mobile-login,
+  .site-header__mobile-logout {
+    white-space: nowrap;
+  }
+
+  /* آکاردئون منوی موبایل */
+  .mnav-group__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .mnav-group--open > .mnav-group__head .nav-dd__chev {
+    transform: rotate(180deg);
+  }
+  .mnav-group__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 2px 0 8px;
+    padding: 6px;
+    border-radius: 14px;
+    background: rgba(194, 112, 61, 0.07);
+    border: 1px solid rgba(194, 112, 61, 0.18);
+  }
+  .mnav-group__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 8px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .mnav-group__item--active {
+    background: rgba(194, 112, 61, 0.16);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header__brand-group {
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .site-header__brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .site-header__cta,
+  .site-header__mobile-account,
+  .site-header__mobile-login,
+  .site-header__mobile-logout {
+    padding: 7px 10px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header__cta {
+    padding: 7px 8px;
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dd__panel-wrap,
+  .nav-dd__chev,
+  .nav-dd__item {
+    transition: none;
+  }
+}

@@ -1,0 +1,63 @@
+.lab-hero { background: var(--color-bg-alt); padding: 36px 0; border-bottom: 1px solid var(--color-border); }
+.lab-hero__inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.lab-hero__text { flex: 1; min-width: 0; }
+.lab-hero__title { font-size: 2rem; margin: 0 0 6px; }
+.lab-hero__slogan { color: var(--color-copper-dark); font-weight: 700; margin: 0 0 12px; }
+.lab-hero__desc { color: var(--color-ink-soft); line-height: 2; margin: 0 0 18px; max-width: 640px; }
+.lab-hero__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.lab-hero__logo { flex-shrink: 0; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px; }
+.lab-hero__logo img { display: block; width: 220px; max-width: 100%; height: auto; }
+
+.lab-partner { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: var(--color-white); border: 1px solid var(--color-border); border-inline-start: 4px solid var(--color-copper); border-radius: var(--radius-md); padding: 16px 18px; margin-top: 24px; }
+.lab-partner img { height: 44px; width: auto; }
+.lab-partner__x { font-size: 1.4rem; color: var(--color-ink-soft); }
+.lab-partner p { flex: 1 1 280px; margin: 0; line-height: 2; font-weight: 600; }
+
+.lab-activities { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.lab-activities li { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px 14px; font-weight: 600; font-size: 0.92rem; }
+
+.lab-companies { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.lab-company { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 18px; }
+.lab-company h3 { margin: 8px 0; font-size: 1.05rem; }
+.lab-company p { margin: 0; color: var(--color-ink-soft); font-size: 0.88rem; line-height: 2; }
+.lab-company__num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--color-copper); color: var(--color-white); font-weight: 700; font-size: 0.85rem; }
+
+.lab-devices { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.lab-device { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; }
+.lab-device__media img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--color-bg-alt); }
+.lab-device__noimg { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; background: var(--color-bg-alt); color: var(--color-ink-soft); font-size: 0.85rem; }
+.lab-device__thumbs { display: flex; gap: 6px; padding: 8px; overflow-x: auto; }
+.lab-device__thumb { border: 2px solid transparent; border-radius: 6px; padding: 0; background: none; flex-shrink: 0; cursor: pointer; }
+.lab-device__thumb img { width: 54px; height: 42px; aspect-ratio: auto; border-radius: 4px; }
+.lab-device__thumb--active { border-color: var(--color-copper); }
+.lab-device__body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.lab-device__brand { font-size: 0.75rem; font-weight: 700; color: var(--color-copper-dark); }
+.lab-device__title { margin: 0; font-size: 1.02rem; }
+.lab-device__en { font-size: 0.8rem; color: var(--color-ink-soft); }
+.lab-device__desc { margin: 4px 0 8px; color: var(--color-ink-soft); font-size: 0.88rem; line-height: 1.9; }
+
+.lab-brands { display: flex; flex-wrap: wrap; gap: 10px; }
+.lab-brand { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 999px; padding: 8px 18px; font-weight: 700; font-size: 0.88rem; }
+
+.lab-brochures { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.lab-brochures img { width: 100%; height: auto; border-radius: var(--radius-md); border: 1px solid var(--color-border); display: block; }
+
+.lab-contact { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.lab-contact__card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.lab-contact__card p { margin: 0; color: var(--color-ink-soft); line-height: 2; font-size: 0.9rem; }
+.lab-contact__card a { color: var(--color-copper-dark); font-weight: 600; }
+
+@media (max-width: 760px) {
+  .lab-hero__inner { flex-direction: column-reverse; align-items: flex-start; }
+  .lab-hero__title { font-size: 1.6rem; }
+  .lab-hero__logo img { width: 160px; }
+}
+
+.lab-activities--check li::before { content: '✓'; color: var(--color-copper-dark); font-weight: 800; margin-inline-end: 8px; }
+
+.lab-docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.lab-doc { display: flex; align-items: center; gap: 12px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 14px 16px; color: inherit; text-decoration: none; transition: border-color .15s; }
+.lab-doc:hover { border-color: var(--color-copper); }
+.lab-doc__icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 8px; background: var(--color-copper); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; }
+.lab-doc__title { flex: 1; font-weight: 700; font-size: 0.92rem; line-height: 1.7; }
+.lab-doc__cta { font-size: 0.78rem; color: var(--color-copper-dark); font-weight: 700; white-space: nowrap; }

@@ -1,0 +1,92 @@
+.my-ads__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.my-ads__head h2 {
+  font-size: 1.05rem;
+}
+
+.my-ads__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.my-ads__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.my-ads__thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-bg-alt);
+}
+
+.my-ads__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.my-ads__title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-ads__boost-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-copper-dark);
+  background: rgba(194, 112, 61, 0.12);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.my-ads__meta {
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.my-ads__reject-reason {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-danger);
+  margin-top: 2px;
+}
+
+.my-ads__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .my-ads__item {
+    flex-wrap: wrap;
+  }
+  .my-ads__actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

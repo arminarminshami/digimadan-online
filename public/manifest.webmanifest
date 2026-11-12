@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "دیجی‌معدن | بازار آگهی معدن و مواد معدنی ایران",
+  "short_name": "دیجی‌معدن",
+  "description": "خرید و فروش مواد معدنی، معادن و ماشین‌آلات معدنی، مزایده و قیمت لحظه‌ای فلزات",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1C1B19",
+  "theme_color": "#1C1B19",
+  "categories": ["business", "shopping"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "ثبت رایگان آگهی", "short_name": "ثبت آگهی", "url": "/submit-ad", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "آگهی‌های تازه", "short_name": "آگهی‌ها", "url": "/ads", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "قیمت‌های بازار", "short_name": "قیمت‌ها", "url": "/prices", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

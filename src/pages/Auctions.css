@@ -1,0 +1,254 @@
+/* ============================================================
+   بخش مزایده — هویت بصری مجزا
+   رنگ اصلی سایت مسی/گرم است؛ برای مزایده از سرمه‌ای عمیق با لهجه‌ی
+   طلایی استفاده شده تا رسمی‌تر و متمایز به‌نظر برسد، ولی همچنان با
+   فضای کلی سایت هماهنگ بماند.
+   ============================================================ */
+.auc-page {
+  --auc-navy: #1e2a3a;
+  --auc-navy-soft: #2c3c52;
+  --auc-gold: #b8894a;
+  --auc-gold-dark: #9a7139;
+  --auc-line: #d7dde5;
+  --auc-bg: #f5f7fa;
+  background: var(--auc-bg);
+  min-height: 60vh;
+}
+
+/* ---- سربرگ ---- */
+.auc-hero {
+  background: linear-gradient(135deg, var(--auc-navy) 0%, var(--auc-navy-soft) 100%);
+  color: #fff;
+  padding: 46px 0 40px;
+  border-bottom: 3px solid var(--auc-gold);
+}
+
+.auc-hero--detail {
+  padding: 38px 0 32px;
+}
+
+.auc-eyebrow {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--auc-gold);
+  border: 1px solid var(--auc-gold);
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+.auc-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.auc-subtitle {
+  margin: 10px 0 0;
+  color: #c3cdda;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  max-width: 640px;
+}
+
+.auc-body {
+  padding: 30px 0 60px;
+}
+
+/* ---- دکمه‌ها ---- */
+.btn-auc {
+  background: var(--auc-navy);
+  color: #fff;
+  border: 1.5px solid var(--auc-navy);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  justify-content: center;
+}
+.btn-auc:hover:not(:disabled) { background: var(--auc-navy-soft); }
+.btn-auc:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-auc small { font-size: 0.72rem; font-weight: 500; opacity: 0.85; }
+
+.btn-auc--pending { background: #8d97a5; border-color: #8d97a5; }
+
+.btn-auc-outline {
+  background: transparent;
+  color: var(--auc-navy);
+  border: 1.5px solid var(--auc-line);
+}
+.btn-auc-outline:hover { border-color: var(--auc-gold); color: var(--auc-gold-dark); }
+
+/* ---- کارت‌های فهرست ---- */
+.auc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.auc-card {
+  background: #fff;
+  border: 1px solid var(--auc-line);
+  border-radius: 6px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.auc-card:hover { box-shadow: 0 10px 28px rgba(30, 42, 58, 0.14); transform: translateY(-2px); }
+
+.auc-card__media { position: relative; aspect-ratio: 16/9; background: #e6eaf0; }
+.auc-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.auc-card__ph { width: 100%; height: 100%; background: linear-gradient(135deg, #dde3ec, #eef1f6); }
+
+.auc-badge {
+  position: absolute;
+  top: 10px;
+  inset-inline-start: 10px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 3px;
+  color: #fff;
+}
+.auc-badge--live { background: #2e7d52; }
+.auc-badge--upcoming { background: var(--auc-gold); }
+.auc-badge--closed { background: #78828f; }
+
+.auc-card__body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.auc-card__cat { font-size: 0.72rem; color: var(--auc-gold-dark); font-weight: 800; }
+.auc-card__title { font-size: 1rem; margin: 0; color: var(--auc-navy); line-height: 1.7; }
+.auc-card__desc { font-size: 0.83rem; color: #5d6773; margin: 0; line-height: 1.9; }
+
+.auc-card__meta { margin: 6px 0 0; display: flex; flex-direction: column; gap: 5px; }
+.auc-card__meta div { display: flex; justify-content: space-between; gap: 10px; font-size: 0.78rem; }
+.auc-card__meta dt { color: #78828f; margin: 0; }
+.auc-card__meta dd { margin: 0; color: var(--auc-navy); font-weight: 700; }
+
+.auc-card__cta {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--auc-line);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--auc-gold-dark);
+}
+
+/* ---- صفحه‌ی جزئیات ---- */
+.auc-detail {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 26px;
+  align-items: start;
+}
+
+.auc-detail__main { display: flex; flex-direction: column; gap: 20px; }
+
+.auc-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.auc-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 5px; border: 1px solid var(--auc-line); }
+
+.auc-section {
+  background: #fff;
+  border: 1px solid var(--auc-line);
+  border-radius: 6px;
+  padding: 20px;
+}
+.auc-section h2 {
+  font-size: 1.02rem;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--auc-gold);
+  display: inline-block;
+  color: var(--auc-navy);
+}
+.auc-section p { margin: 0; line-height: 2; color: #46505c; white-space: pre-wrap; }
+
+.auc-section--terms { background: #fbf8f3; border-color: #e8dcc8; }
+.auc-section--result { background: #f2f7f4; border-color: #cfe3d6; }
+
+.auc-window { font-size: 0.82rem; color: #5d6773; margin-bottom: 12px !important; }
+.auc-locked {
+  background: #fdf0ee; border: 1px solid #f0c8c2; color: #a8453a;
+  padding: 12px 14px; border-radius: 5px; font-size: 0.85rem;
+}
+.auc-muted { font-size: 0.83rem; color: #78828f; line-height: 1.9; }
+
+.auc-doclist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.auc-doclist li {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 11px 14px; background: var(--auc-bg); border: 1px solid var(--auc-line); border-radius: 5px;
+  font-size: 0.86rem;
+}
+.auc-doclist--compact li { background: #fff; }
+
+/* ---- ستون کناری ---- */
+.auc-detail__side { position: sticky; top: 90px; }
+.auc-box {
+  background: #fff; border: 1px solid var(--auc-line); border-radius: 6px;
+  padding: 18px; display: flex; flex-direction: column; gap: 14px;
+}
+.auc-box__row { display: flex; flex-direction: column; gap: 3px; font-size: 0.82rem; color: #78828f; }
+.auc-box__row strong { font-size: 1rem; color: var(--auc-navy); }
+
+.auc-participated {
+  display: flex; flex-direction: column; gap: 8px;
+  background: #f2f7f4; border: 1px solid #cfe3d6; border-radius: 5px; padding: 14px;
+  font-size: 0.85rem;
+}
+
+/* ---- دروازه‌ی ورود ---- */
+.auc-gate {
+  text-align: center; padding: 56px 20px; max-width: 520px; margin: 0 auto;
+}
+.auc-gate h2 { font-size: 1.15rem; margin: 0 0 12px; color: var(--auc-navy, #1e2a3a); }
+.auc-gate p { color: #5d6773; line-height: 2; margin: 0 0 22px; }
+
+/* ---- فرم شرکت ---- */
+.auc-participate { display: flex; flex-direction: column; gap: 18px; max-width: 720px; margin: 0 auto; }
+.auc-step { background: #fff; border: 1px solid var(--auc-line); border-radius: 6px; padding: 20px; }
+.auc-step h2 {
+  font-size: 1rem; margin: 0 0 14px; color: var(--auc-navy);
+  padding-bottom: 8px; border-bottom: 2px solid var(--auc-gold); display: inline-block;
+}
+
+.auc-profile { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 0 16px; }
+.auc-profile div { display: flex; flex-direction: column; gap: 2px; }
+.auc-profile__wide { grid-column: 1 / -1; }
+.auc-profile dt { font-size: 0.75rem; color: #78828f; margin: 0; }
+.auc-profile dd { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--auc-navy); }
+
+.auc-confirm {
+  display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700;
+  padding: 12px 14px; background: var(--auc-bg); border-radius: 5px; cursor: pointer;
+  color: var(--auc-navy);
+}
+
+.auc-fee { font-size: 0.9rem; color: #46505c; margin: 0 0 12px; }
+.auc-payment-pending {
+  background: #fdf6e8; border: 1px solid #e8d5a8; color: #8a6d2f;
+  padding: 14px; border-radius: 5px; font-size: 0.85rem; line-height: 1.9;
+}
+
+.auc-submit-row { display: flex; justify-content: flex-end; }
+.auc-submit-row .btn-auc { width: auto; min-width: 220px; }
+
+.auc-done__icon {
+  width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 50%;
+  background: #2e7d52; color: #fff; font-size: 2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.auc-done__msg { line-height: 2.2; }
+
+@media (max-width: 860px) {
+  .auc-detail { grid-template-columns: 1fr; }
+  .auc-detail__side { position: static; }
+}
+@media (max-width: 560px) {
+  .auc-title { font-size: 1.3rem; }
+  .auc-profile { grid-template-columns: 1fr; }
+}

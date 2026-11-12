@@ -1,0 +1,36 @@
+.back-bar {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 10px 0;
+}
+
+.back-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-ink-soft);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.back-bar__btn:hover {
+  border-color: var(--color-copper);
+  color: var(--color-copper);
+}
+
+@media (max-width: 640px) {
+  .back-bar {
+    padding: 8px 0;
+  }
+  .back-bar__btn {
+    font-size: 0.82rem;
+    padding: 8px 13px;
+  }
+}

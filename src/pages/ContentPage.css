@@ -1,0 +1,15 @@
+.content-page {
+  padding: 48px 20px 64px;
+  max-width: 760px;
+}
+
+.content-page__title {
+  font-size: 1.8rem;
+}
+
+.content-page__body {
+  white-space: pre-wrap;
+  line-height: 2;
+  color: var(--color-ink-soft);
+  font-size: 1rem;
+}
