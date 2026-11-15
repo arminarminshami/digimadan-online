@@ -340,3 +340,34 @@
     height: 50px;
   }
 }
+
+/* گوشی‌های خیلی کم‌ارتفاع (مثل iPhone SE نسل اول): دکمه‌ی «ادامه» زیر نوار پایین نماند */
+@media (max-height: 600px) {
+  .pa {
+    gap: 8px;
+    padding: 8px 14px 12px;
+  }
+  .pa-bubble {
+    padding: 8px 10px;
+  }
+  .pa-bubble p {
+    font-size: 0.76rem;
+    line-height: 1.7;
+  }
+  .pa-type {
+    padding: 9px 12px;
+  }
+  .pa-type small {
+    display: none;
+  }
+  .pa-type__icon {
+    width: 44px;
+    height: 44px;
+  }
+  .pa-cat {
+    min-height: 84px;
+  }
+  .pa-btn {
+    min-height: 46px;
+  }
+}

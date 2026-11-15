@@ -45,7 +45,9 @@ export function installGlobalHaptics() {
     const t = e.target
     if (!t || !t.closest) return
     if (t.closest('[data-haptic-source]')) return
-    const el = t.closest('a[href], button, [role="button"], label, summary, select')
+    // منوی انتخاب، فیلدها و برچسب‌های فرم را خراب نکن (در آیفون باز شدن لیست انتخاب را مختل می‌کرد)
+    if (t.closest('select, input, textarea, label, option, [contenteditable="true"]')) return
+    const el = t.closest('a[href], button, [role="button"], summary')
     if (!el || el.disabled || el.getAttribute('aria-disabled') === 'true') return
     haptic()
   }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import AppIcon from './AppIcons'
 import { useGuide } from './GuideContext'
 import { enablePush, pushPermission, pushSupported } from './push'
@@ -30,31 +30,42 @@ export default function NotifyPrompt({ variant = 'user' }) {
   const [eligible, setEligible] = useState(false)
   const [show, setShow] = useState(false)
   const [state, setState] = useState('idle') // idle | busy | done | denied | error
+  // بعد از فعال‌شدن، رد‌کردن یا «بعداً» این پنجره دیگر هرگز خودکار باز نمی‌شود
+  const finished = useRef(false)
 
   useEffect(() => {
-    if (!pushSupported() || pushPermission() !== 'default' || dismissedRecently()) return undefined
+    if (finished.current || !pushSupported() || pushPermission() !== 'default' || dismissedRecently()) return undefined
     const t = setTimeout(() => setEligible(true), 4000)
     return () => clearTimeout(t)
   }, [])
 
   // فقط وقتی راهنما بسته است و راهنمای خوش‌آمدگویی دیده شده
   useEffect(() => {
-    if (!eligible || guideOpen || !welcomeSeen(welcomeKey)) {
+    // فقط وقتی هنوز اجازه‌ای داده نشده و کاربر این پنجره را تمام نکرده
+    if (finished.current || !eligible || guideOpen || !welcomeSeen(welcomeKey) || pushPermission() !== 'default') {
       if (state === 'idle') setShow(false)
       return undefined
     }
     const t = setTimeout(() => setShow(true), 1200)
     return () => clearTimeout(t)
-  }, [eligible, guideOpen, state])
+  }, [eligible, guideOpen, state, welcomeKey])
 
   if (!show) return null
 
+  function close() {
+    finished.current = true
+    setEligible(false)
+    setShow(false)
+  }
+
   function later() {
+    finished.current = true
     try {
       localStorage.setItem(DISMISS_KEY, String(Date.now()))
     } catch {
       /* ignore */
     }
+    setEligible(false)
     setShow(false)
   }
 
@@ -62,6 +73,7 @@ export default function NotifyPrompt({ variant = 'user' }) {
     setState('busy')
     try {
       const r = await enablePush()
+      finished.current = true
       if (r.ok) setState('done')
       else if (r.reason === 'denied') setState('denied')
       else {
@@ -69,6 +81,7 @@ export default function NotifyPrompt({ variant = 'user' }) {
         later()
       }
     } catch {
+      finished.current = true
       setState('error')
     }
   }
@@ -143,7 +156,7 @@ export default function NotifyPrompt({ variant = 'user' }) {
               </button>
             </>
           ) : (
-            <button type="button" className="guide-btn guide-btn--primary" onClick={() => setShow(false)}>
+            <button type="button" className="guide-btn guide-btn--primary" onClick={close}>
               بستن
             </button>
           )}

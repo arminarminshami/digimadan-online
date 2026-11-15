@@ -113,7 +113,7 @@ export default function SubmitAd() {
   useEffect(() => {
     if (authLoading) return
     if (!isAuthenticated) {
-      navigate('/login', { state: { redirectTo: '/submit-ad' } })
+      navigate('/login', { state: { redirectTo: '/submit-ad' + window.location.search } })
       return
     }
     let mounted = true
@@ -358,7 +358,7 @@ export default function SubmitAd() {
             آگهی شما برای بررسی نزد تیم دیجی‌معدن ارسال شد. پس از تایید ادمین، به‌صورت
             خودکار روی سایت منتشر می‌شود و در صفحه‌ی آگهی‌ها نمایش داده خواهد شد.
           </p>
-          <button className="btn btn-primary" onClick={() => navigate('/dashboard/ads')}>
+          <button className="btn btn-primary" onClick={() => navigate('/dashboard?tab=ads')}>
             بازگشت به آگهی‌های من
           </button>
         </div>
