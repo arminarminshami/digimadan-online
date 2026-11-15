@@ -91,6 +91,19 @@ export default function SubmitAd() {
   const [checkingIdentity, setCheckingIdentity] = useState(true)
   const [rejectionReason, setRejectionReason] = useState(null)
 
+  // ورود از صفحه‌ی «ثبت رایگان آگهی» اپلیکیشن: نوع و دسته‌بندی از قبل انتخاب شده‌اند
+  useEffect(() => {
+    if (editId) return
+    const t = searchParams.get('type')
+    const cat = searchParams.get('category')
+    setForm((prev) => ({
+      ...prev,
+      ...(t === 'sell' || t === 'buy' ? { ad_type: t } : {}),
+      ...(AD_CATEGORIES.some((x) => x.value === cat) ? { category: cat } : {}),
+    }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const isMineral = form.category === 'mineral_materials'
   const isMine = form.category === 'mines'
   const isMachinery = form.category === 'mining_machinery'

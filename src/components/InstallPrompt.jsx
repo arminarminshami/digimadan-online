@@ -17,9 +17,9 @@ function isIOS() {
   return /iPhone|iPad|iPod/.test(ua) || iPadOS
 }
 
-function recentlyDismissed() {
+function recentlyDismissed(key) {
   try {
-    const t = Number(localStorage.getItem(DISMISS_KEY) || 0)
+    const t = Number(localStorage.getItem(key) || 0)
     return t && Date.now() - t < DISMISS_DAYS * 86400e3
   } catch {
     return false
@@ -27,13 +27,15 @@ function recentlyDismissed() {
 }
 
 // پیشنهاد نصب وب‌اپلیکیشن؛ فقط روی گوشی و وقتی هنوز نصب نشده
-export default function InstallPrompt() {
+export default function InstallPrompt({ variant = 'user' }) {
+  const admin = variant === 'admin'
+  const dismissKey = admin ? DISMISS_KEY + '_admin' : DISMISS_KEY
   const [deferred, setDeferred] = useState(null) // رویداد نصب اندروید/کروم
   const [visible, setVisible] = useState(false)
   const ios = typeof window !== 'undefined' && isIOS()
 
   useEffect(() => {
-    if (isStandalone() || recentlyDismissed()) return undefined
+    if (isStandalone() || recentlyDismissed(dismissKey)) return undefined
     if (!window.matchMedia('(max-width: 820px)').matches) return undefined
 
     let timer
@@ -62,7 +64,7 @@ export default function InstallPrompt() {
   function dismiss() {
     setVisible(false)
     try {
-      localStorage.setItem(DISMISS_KEY, String(Date.now()))
+      localStorage.setItem(dismissKey, String(Date.now()))
     } catch {
       /* بدون ذخیره‌سازی هم مشکلی نیست */
     }
@@ -84,10 +86,10 @@ export default function InstallPrompt() {
   if (!deferred && !ios) return null
 
   return (
-    <div className="install-prompt" role="dialog" aria-label="نصب اپلیکیشن دیجی‌معدن">
-      <img src="/icon-192.png" alt="" className="install-prompt__icon" />
+    <div className="install-prompt" role="dialog" aria-label={admin ? 'نصب اپلیکیشن مدیریت دیجی‌معدن' : 'نصب اپلیکیشن دیجی‌معدن'}>
+      <img src={admin ? '/admin-icon-192.png' : '/icon-192.png'} alt="" className="install-prompt__icon" />
       <div className="install-prompt__text">
-        <strong>اپلیکیشن دیجی‌معدن</strong>
+        <strong>{admin ? 'اپلیکیشن مدیریت دیجی‌معدن' : 'اپلیکیشن دیجی‌معدن'}</strong>
         {ios ? (
           <span>
             در Safari دکمه‌ی اشتراک‌گذاری
@@ -97,7 +99,11 @@ export default function InstallPrompt() {
             را بزنید و «افزودن به صفحه اصلی» را انتخاب کنید.
           </span>
         ) : (
-          <span>با نصب، دیجی‌معدن را مثل یک اپلیکیشن از صفحه اصلی گوشی باز کنید.</span>
+          <span>
+            {admin
+              ? 'با نصب، پنل مدیریت را مثل یک اپلیکیشن از صفحه اصلی گوشی باز کنید و سایت را مدیریت کنید.'
+              : 'با نصب، دیجی‌معدن را مثل یک اپلیکیشن از صفحه اصلی گوشی باز کنید.'}
+          </span>
         )}
       </div>
       {!ios && (

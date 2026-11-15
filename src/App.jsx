@@ -5,7 +5,7 @@ import ProtectedRoute from './admin/ProtectedRoute'
 import AdminLayout from './admin/AdminLayout'
 import PublicLayout from './components/PublicLayout'
 
-import Home from './pages/Home'
+import { HomeEntry, DashboardEntry, ServicesEntry, PostAdEntry } from './app/entries'
 import Ads from './pages/Ads'
 import AdDetail from './pages/AdDetail'
 import Minerals from './pages/Minerals'
@@ -14,7 +14,6 @@ import AuctionDetail from './pages/AuctionDetail'
 import AuctionParticipate from './pages/AuctionParticipate'
 import SearchResults from './pages/SearchResults'
 import SubmitAd from './pages/SubmitAd'
-import Dashboard from './pages/Dashboard'
 import Prices from './pages/Prices'
 import News from './pages/News'
 import Articles from './pages/Articles'
@@ -29,6 +28,7 @@ import LabEquipment from './pages/LabEquipment'
 
 import AdminLogin from './admin/pages/AdminLogin'
 import AdminDashboard from './admin/pages/AdminDashboard'
+import { AdminHomeEntry } from './admin/app/entries'
 import AdminAdsList from './admin/pages/AdminAdsList'
 import AdminAdForm from './admin/pages/AdminAdForm'
 import AdminUsersList from './admin/pages/AdminUsersList'
@@ -83,7 +83,9 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         {/* Public site */}
-        <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+        <Route path="/" element={<PublicLayout><HomeEntry /></PublicLayout>} />
+        <Route path="/app/services" element={<PublicLayout><ServicesEntry /></PublicLayout>} />
+        <Route path="/app/post-ad" element={<PublicLayout><PostAdEntry /></PublicLayout>} />
         <Route path="/ads" element={<PublicLayout><Ads /></PublicLayout>} />
         <Route path="/ads/:id" element={<PublicLayout><AdDetail /></PublicLayout>} />
         <Route path="/auctions" element={<PublicLayout><Auctions /></PublicLayout>} />
@@ -93,7 +95,7 @@ export default function App() {
         <Route path="/search" element={<PublicLayout><SearchResults /></PublicLayout>} />
         <Route path="/page/:slug" element={<PublicLayout><ContentPage /></PublicLayout>} />
         <Route path="/submit-ad" element={<PublicLayout><SubmitAd /></PublicLayout>} />
-        <Route path="/dashboard" element={<PublicLayout><Dashboard /></PublicLayout>} />
+        <Route path="/dashboard" element={<PublicLayout><DashboardEntry /></PublicLayout>} />
         <Route path="/messages" element={<LegacyMessagesRedirect />} />
         <Route path="/prices" element={<PublicLayout><Prices /></PublicLayout>} />
         <Route path="/lab-equipment" element={<PublicLayout><LabEquipment /></PublicLayout>} />
@@ -118,7 +120,8 @@ export default function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
 
         {/* Admin panel (protected) */}
-        <Route path="/admin" element={<AdminShell><AdminDashboard /></AdminShell>} />
+        <Route path="/admin" element={<AdminShell><AdminHomeEntry /></AdminShell>} />
+        <Route path="/admin/stats" element={<AdminShell><AdminDashboard /></AdminShell>} />
         <Route path="/admin/ads" element={<AdminShell><AdminAdsList /></AdminShell>} />
         <Route path="/admin/ads/new" element={<AdminShell><AdminAdForm /></AdminShell>} />
         <Route path="/admin/ads/:id/edit" element={<AdminShell><AdminAdForm /></AdminShell>} />

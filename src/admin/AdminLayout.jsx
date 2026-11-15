@@ -5,6 +5,10 @@ import BackButton from '../components/BackButton'
 import { useAuth } from './AuthContext'
 import './AdminLayout.css'
 import './AdminMobile.css'
+import InstallPrompt from '../components/InstallPrompt'
+import { APP_MODE } from '../app/appMode'
+import AdminAppLayout from './app/AdminAppLayout'
+import { useAdminManifest } from './app/useAdminManifest'
 
 const NAV_ITEMS = [
   { to: '/admin', label: 'داشبورد', end: true, icon: 'grid' },
@@ -47,7 +51,7 @@ const ICONS = {
   gear: <path d="M12 9a3 3 0 100 6 3 3 0 000-6zM4.2 12a7.8 7.8 0 01.1-1.2l-1.8-1.4 1.4-2.4 2.1.6a7.7 7.7 0 011.6-1l.3-2.2h2.8l.3 2.2a7.7 7.7 0 011.6 1l2.1-.6 1.4 2.4-1.8 1.4c.07.4.1.8.1 1.2s-.03.8-.1 1.2l1.8 1.4-1.4 2.4-2.1-.6a7.7 7.7 0 01-1.6 1l-.3 2.2h-2.8l-.3-2.2a7.7 7.7 0 01-1.6-1l-2.1.6-1.4-2.4 1.8-1.4c-.07-.4-.1-.8-.1-1.2z" />,
 }
 
-export default function AdminLayout({ children }) {
+function AdminLayoutClassic({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
   const { user } = useAuth()
@@ -181,6 +185,14 @@ export default function AdminLayout({ children }) {
           <span>بیشتر</span>
         </button>
       </nav>
+
+      <InstallPrompt variant="admin" />
     </div>
   )
+}
+
+// در اپلیکیشن مدیریت (وب‌اپ نصب‌شده روی گوشی) قالب اپلیکیشن؛ در مرورگر همان پنل قبلی
+export default function AdminLayout({ children }) {
+  useAdminManifest()
+  return APP_MODE ? <AdminAppLayout>{children}</AdminAppLayout> : <AdminLayoutClassic>{children}</AdminLayoutClassic>
 }

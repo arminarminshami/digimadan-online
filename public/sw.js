@@ -3,8 +3,9 @@
  *   (درخواست‌های Supabase و هر دامنه‌ی دیگر دست‌نخورده می‌روند).
  * - صفحه‌ها همیشه اول از شبکه گرفته می‌شوند تا بعد از هر انتشار، کاربر نسخه‌ی تازه را ببیند.
  * - فقط فایل‌های هش‌دار /assets/ (که هیچ‌وقت تغییر نمی‌کنند) کش می‌شوند.
+ * - اعلان‌ها (Web Push): نمایش اعلان و باز کردن صفحه‌ی مربوط با لمس آن.
  */
-const VERSION = 'dm-v1'
+const VERSION = 'dm-v2'
 const STATIC_CACHE = `${VERSION}-static`
 const SHELL = ['/offline.html', '/icon-192.png', '/icon-512.png']
 
@@ -49,4 +50,41 @@ self.addEventListener('fetch', (event) => {
       )
     )
   }
+})
+
+// ---------- اعلان‌ها ----------
+self.addEventListener('push', (event) => {
+  let data = {}
+  try {
+    data = event.data ? event.data.json() : {}
+  } catch {
+    data = { body: event.data ? event.data.text() : '' }
+  }
+  const title = data.title || 'دیجی‌معدن'
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: data.body || '',
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      tag: data.tag || undefined,
+      dir: 'rtl',
+      lang: 'fa',
+      data: { url: data.url || '/' },
+    })
+  )
+})
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close()
+  const target = new URL((event.notification.data && event.notification.data.url) || '/', self.location.origin).href
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      for (const client of list) {
+        if (client.url.startsWith(self.location.origin) && 'focus' in client) {
+          return client.focus().then((c) => (c && 'navigate' in c ? c.navigate(target) : c)).catch(() => self.clients.openWindow(target))
+        }
+      }
+      return self.clients.openWindow(target)
+    })
+  )
 })

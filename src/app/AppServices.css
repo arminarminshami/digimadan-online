@@ -1,0 +1,24 @@
+.app-services {
+  padding: 14px 14px 18px;
+}
+
+.app-services__section + .app-services__section {
+  margin-top: 16px;
+}
+
+.app-services__title {
+  margin: 0 4px 8px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #6b675d;
+}
+
+.app-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.app-services__grid .app-tile {
+  min-height: 104px;
+}

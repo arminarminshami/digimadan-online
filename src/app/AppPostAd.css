@@ -1,0 +1,342 @@
+.pa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: calc(100dvh - var(--app-bar-h) - env(safe-area-inset-top, 0px) - var(--app-tab-h) - env(safe-area-inset-bottom, 0px));
+  padding: 14px 16px 16px;
+}
+
+.pa-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.pa-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pa-steps__bar {
+  height: 5px;
+  border-radius: 3px;
+  background: #ddd6c6;
+  transition: background 0.3s ease;
+}
+
+.pa-steps li.is-active .pa-steps__bar,
+.pa-steps li.is-done .pa-steps__bar {
+  background: linear-gradient(90deg, #de9159, #b5602d);
+}
+
+.pa-steps__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #9a958a;
+}
+
+.pa-steps li.is-active .pa-steps__label {
+  color: #b5602d;
+}
+
+.pa-bubble {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(194, 112, 61, 0.25);
+  box-shadow: 0 4px 14px rgba(28, 27, 25, 0.06);
+  animation: pa-pop 0.3s ease both;
+}
+
+.pa-bubble__icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: #c2703d;
+  background: rgba(194, 112, 61, 0.14);
+}
+
+.pa-bubble p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.9;
+  color: #4a473f;
+}
+
+.pa-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 4px;
+  animation: app-page-in 0.28s ease backwards;
+}
+
+/* قدم ۱: دو کاشی بزرگ */
+.pa-types {
+  display: grid;
+  gap: 12px;
+}
+
+.pa-type {
+  --c: #c2703d;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 14px;
+  row-gap: 2px;
+  padding: 16px;
+  text-align: start;
+  border: 2px solid transparent;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+  font-family: inherit;
+  color: #2b2925;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pa-type:active {
+  transform: scale(0.98);
+}
+
+.pa-type.is-selected {
+  border-color: var(--c);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--c) 30%, transparent);
+}
+
+.pa-type__icon {
+  grid-row: 1 / 3;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+.pa-type b {
+  font-size: 1.02rem;
+}
+
+.pa-type small {
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: #6b675d;
+}
+
+.pa-type__tick {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 10px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--c);
+  transform: scale(0);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pa-type.is-selected .pa-type__tick {
+  transform: scale(1);
+}
+
+/* قدم ۲: کاشی‌های دسته‌بندی */
+.pa-cats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pa-cat {
+  --c: #c2703d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: clamp(96px, 15dvh, 118px);
+  padding: 8px 6px;
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+  font-family: inherit;
+  color: #2b2925;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pa-cat:active {
+  transform: scale(0.95);
+}
+
+.pa-cat.is-selected {
+  border-color: var(--c);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--c) 30%, transparent);
+}
+
+.pa-cat__icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+.pa-cat__label {
+  font-size: clamp(0.68rem, 3.2vw, 0.78rem);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* قدم ۳: خلاصه */
+.pa-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pa-summary__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+}
+
+.pa-summary__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pa-summary__row small {
+  display: block;
+  font-size: 0.7rem;
+  color: #8a867b;
+}
+
+.pa-summary__row b {
+  font-size: 0.98rem;
+}
+
+.pa-summary__icon {
+  --c: #c2703d;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+.pa-summary__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pa-summary__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: #4a473f;
+}
+
+.pa-summary__list svg {
+  flex-shrink: 0;
+  margin-top: 5px;
+  color: #5c7a52;
+}
+
+.pa-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.pa-btn {
+  min-height: 52px;
+  border: 0;
+  border-radius: 18px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.pa-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.pa-btn--primary {
+  flex: 1;
+  color: #fff;
+  background: linear-gradient(135deg, #de9159, #b5602d);
+  box-shadow: 0 10px 22px rgba(194, 112, 61, 0.38);
+}
+
+.pa-btn--primary:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.pa-btn--ghost {
+  padding: 0 22px;
+  color: #5b5850;
+  background: #ebe5d6;
+}
+
+@keyframes pa-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-height: 640px) {
+  .pa {
+    gap: 10px;
+    padding-top: 10px;
+  }
+  .pa-type {
+    padding: 11px 14px;
+  }
+  .pa-type__icon {
+    width: 50px;
+    height: 50px;
+  }
+}

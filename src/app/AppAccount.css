@@ -1,0 +1,359 @@
+.acct {
+  padding: 14px 14px 22px;
+}
+
+.acct--center {
+  display: grid;
+  place-items: center;
+  min-height: 50dvh;
+}
+
+.acct-spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(194, 112, 61, 0.25);
+  border-top-color: #c2703d;
+  border-radius: 50%;
+  animation: acct-spin 0.8s linear infinite;
+}
+
+@keyframes acct-spin {
+  to { transform: rotate(360deg); }
+}
+
+.acct-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  color: #f6f3ec;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(194, 112, 61, 0.35), transparent 60%),
+    linear-gradient(180deg, #2a2825, #1c1b19);
+  box-shadow: 0 10px 24px rgba(28, 27, 25, 0.22);
+}
+
+.acct-hero__avatar {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #de9159, #b5602d);
+  box-shadow: 0 0 0 4px rgba(194, 112, 61, 0.28);
+}
+
+.acct-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.acct-hero__text b {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.acct-hero__text small {
+  color: #cfc9ba;
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.acct-points {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: start;
+  transition: transform 0.15s ease;
+}
+
+.acct-points:active {
+  transform: scale(0.98);
+}
+
+.acct-points__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  color: #d9a21b;
+  background: rgba(217, 162, 27, 0.16);
+}
+
+.acct-points__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.acct-points__text small {
+  font-size: 0.72rem;
+  color: #8a867b;
+}
+
+.acct-points__text b {
+  font-size: 1.35rem;
+  color: #211f1c;
+}
+
+.acct-points__more {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #c2703d;
+}
+
+.acct-title {
+  margin: 18px 4px 8px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #6b675d;
+}
+
+.acct-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+}
+
+.acct-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid #f0ebde;
+  background: transparent;
+  font-family: inherit;
+  color: #2b2925;
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.acct-row:last-child {
+  border-bottom: 0;
+}
+
+.acct-row:active {
+  background: #f6f1e6;
+}
+
+.acct-row__icon {
+  --c: #c2703d;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+.acct-row__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.acct-row__text b {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.acct-row__text small {
+  font-size: 0.72rem;
+  color: #8a867b;
+}
+
+.acct-row__arrow {
+  color: #b9b3a3;
+  flex-shrink: 0;
+}
+
+.acct-row--danger .acct-row__text b {
+  color: #b5483a;
+}
+
+.acct-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 26px 20px 22px;
+  text-align: center;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+}
+
+.acct-guest__logo {
+  width: 64px;
+  height: 64px;
+}
+
+.acct-guest h2 {
+  margin: 4px 0 0;
+  font-size: 1.1rem;
+}
+
+.acct-guest p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.9;
+  color: #6b675d;
+}
+
+.acct-guest__btn {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #de9159, #b5602d);
+  box-shadow: 0 8px 18px rgba(194, 112, 61, 0.35);
+}
+
+/* ---------- پنجره‌ی پایین صفحه ---------- */
+.acct-sheet {
+  width: min(100%, 520px);
+  max-height: 86dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 20px calc(18px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: #fffdf8;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.35);
+  animation: guide-up 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.acct-sheet__handle {
+  align-self: center;
+  width: 42px;
+  height: 5px;
+  margin-bottom: 8px;
+  border-radius: 3px;
+  background: #d9d2c2;
+}
+
+.acct-sheet__title {
+  margin: 0 0 6px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.acct-sheet__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acct-sheet__score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  color: #b8860b;
+  background: rgba(217, 162, 27, 0.14);
+}
+
+.acct-sheet__score b {
+  font-size: 1.8rem;
+  color: #211f1c;
+}
+
+.acct-sheet__sub {
+  margin: 10px 2px 0;
+  font-size: 0.82rem;
+  color: #6b675d;
+}
+
+.acct-sheet__rules,
+.acct-sheet__tx {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.acct-sheet__rules li,
+.acct-sheet__tx li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f4efe4;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.acct-sheet__rules b,
+.acct-sheet__tx b {
+  color: #2e8b4f;
+}
+
+.acct-sheet__tx b.is-neg {
+  color: #b5483a;
+}
+
+.acct-sheet__tx small {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #8a867b;
+}
+
+.acct-sheet__muted {
+  margin: 4px 0;
+  font-size: 0.84rem;
+  color: #8a867b;
+}
+
+.acct-sheet__muted--center {
+  text-align: center;
+  padding: 6px 0 10px;
+}
+
+.acct-btn-danger {
+  color: #fff;
+  background: #b5483a;
+}
+
+.acct-sheet .guide-btn {
+  margin-top: 4px;
+}

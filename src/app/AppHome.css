@@ -1,0 +1,306 @@
+/* ---------- صفحه‌ی اصلی اپلیکیشن: بدون اسکرول، هر آیکون یک بخش ---------- */
+.app-home {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--app-tab-h) - env(safe-area-inset-bottom, 0px));
+}
+
+.app-home__top {
+  position: relative;
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 16px 46px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(194, 112, 61, 0.32), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(92, 122, 82, 0.28), transparent 50%),
+    linear-gradient(180deg, #2a2825, #1c1b19);
+  color: #f6f3ec;
+  border-radius: 0 0 30px 30px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app-home__top::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 0 0 30px 30px;
+  background: linear-gradient(90deg, #c2703d 0 25%, #a8a08c 25% 50%, #5c7a52 50% 75%, #3a3835 75% 100%);
+}
+
+.app-home__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.app-home__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.app-home__logo {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.app-home__brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-home__brand-text b {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.app-home__brand-text small {
+  font-size: 0.72rem;
+  color: #cfc9ba;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-home__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.app-home__round {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.app-home__round:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.app-home__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  margin-top: 12px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #d8d2c3;
+}
+
+.app-home__search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px; /* جلوگیری از زوم خودکار آیفون هنگام فوکوس */
+}
+
+.app-home__search input::placeholder {
+  color: #bdb7a8;
+  font-size: 0.82rem;
+}
+
+/* کارت ثبت رایگان آگهی: روی مرز بخش تیره و روشن */
+.app-home__cta {
+  position: absolute;
+  inset-inline: 16px;
+  bottom: -34px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #e0935c, #b8622f);
+  color: #fff;
+  box-shadow: 0 8px 16px -4px rgba(184, 98, 47, 0.5);
+  transition: transform 0.15s ease;
+}
+
+.app-home__cta:active {
+  transform: scale(0.98);
+}
+
+.app-home__cta-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.app-home__cta-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.app-home__cta-text b {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.app-home__cta-text small {
+  font-size: 0.7rem;
+  opacity: 0.92;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-home__cta-arrow {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.app-home__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(88px, 1fr));
+  gap: 10px;
+  padding: 52px 14px 14px;
+}
+
+/* ---------- کاشی‌ها (صفحه‌ی اصلی و خدمات) ---------- */
+.app-tile {
+  --c: #c2703d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 6px;
+  text-align: center;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(28, 27, 25, 0.06);
+  color: #2b2925;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-tile:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(28, 27, 25, 0.1);
+}
+
+.app-tile__icon {
+  width: clamp(44px, 7.4dvh, 56px);
+  height: clamp(44px, 7.4dvh, 56px);
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+.app-tile__icon {
+  position: relative;
+}
+
+.app-tile__badge {
+  position: absolute;
+  top: -6px;
+  inset-inline-start: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #d6402f;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.app-tile__label {
+  font-size: clamp(0.7rem, 3.3vw, 0.8rem);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.app-tile__hint {
+  font-size: 0.64rem;
+  color: #8a867b;
+  line-height: 1.4;
+}
+
+/* گوشی‌های کم‌ارتفاع (مثل iPhone SE) */
+@media (max-height: 700px) {
+  .app-home__top {
+    padding-bottom: 42px;
+  }
+  .app-home__search {
+    height: 40px;
+    margin-top: 8px;
+  }
+  .app-home__grid {
+    padding-top: 48px;
+    gap: 8px;
+    grid-template-rows: repeat(3, minmax(78px, 1fr));
+  }
+  .app-tile {
+    gap: 5px;
+  }
+}
+
+@media (max-height: 600px) {
+  .app-home__cta-text small {
+    display: none;
+  }
+  .app-home__cta {
+    padding-block: 8px;
+    bottom: -30px;
+  }
+  .app-home__grid {
+    padding-top: 42px;
+  }
+}
+
+/* گوشی‌های خیلی باریک */
+@media (max-width: 340px) {
+  .app-home__grid {
+    gap: 8px;
+    padding-inline: 10px;
+  }
+  .app-home__brand-text small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-tile,
+  .app-home__cta,
+  .app-home__round {
+    transition: none;
+  }
+}

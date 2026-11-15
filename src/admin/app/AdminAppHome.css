@@ -1,0 +1,73 @@
+.aah__top {
+  padding-bottom: 26px;
+}
+
+.aah__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.aah__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 6px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f6f3ec;
+}
+
+.aah__stat b {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.aah__stat span {
+  font-size: 0.68rem;
+  color: #cfc9ba;
+}
+
+.aah__stat--hot.is-active {
+  background: linear-gradient(135deg, #e0935c, #b8622f);
+  border-color: transparent;
+  box-shadow: 0 8px 16px -6px rgba(184, 98, 47, 0.7);
+}
+
+.aah__stat--hot.is-active span {
+  color: #fff;
+}
+
+.aah__groups {
+  padding: 18px 14px 22px;
+}
+
+.aah__logout {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(181, 72, 58, 0.35);
+  border-radius: 16px;
+  background: #fff;
+  color: #b5483a;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.aah__logout:active {
+  background: #fbeeed;
+}
+
+/* ردیف‌های هم‌اندازه برای کاشی‌ها */
+.aah .app-services__grid {
+  grid-auto-rows: 1fr;
+}

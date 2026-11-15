@@ -1,0 +1,28 @@
+/* اپلیکیشن مدیریت: ظاهر نوار پایین و نوار بالا از AppLayout.css می‌آید */
+.admin-app .app-tab__icon {
+  position: relative;
+}
+
+.admin-tab-badge {
+  position: absolute;
+  top: -5px;
+  inset-inline-start: -2px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #d6402f;
+  color: #fff;
+  font-size: 0.64rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* صفحه‌های مدیریت داخل قالب اپلیکیشن */
+.app-frame .admin-app-main {
+  flex: none;
+  padding: 14px 14px 24px;
+  overflow-x: hidden;
+}
