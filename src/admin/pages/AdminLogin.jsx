@@ -12,6 +12,7 @@ export default function AdminLogin() {
   const location = useLocation()
 
   const redirectTo = location.state?.from || '/admin'
+  const notAdmin = Boolean(location.state?.notAdmin)
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -61,6 +62,9 @@ export default function AdminLogin() {
           />
         </label>
 
+        {notAdmin && !error && (
+          <p className="admin-login__error">این حساب دسترسی مدیریت ندارد. با حساب مدیر وارد شوید.</p>
+        )}
         {error && <p className="admin-login__error">{error}</p>}
 
         <button type="submit" className="btn btn-primary btn-block" disabled={loading}>

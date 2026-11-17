@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../admin/AuthContext'
 import AppIcon from './AppIcons'
 import NotifyPrompt from './NotifyPrompt'
+import UpdatePrompt from './UpdatePrompt'
 import { installGlobalHaptics } from './haptics'
 import { syncPush } from './push'
 import { GuideProvider, useGuide, useFirstRunWelcome } from './GuideContext'
@@ -146,6 +147,7 @@ function Shell({ children }) {
         ))}
       </nav>
 
+      <UpdatePrompt />
       <NotifyPrompt />
     </div>
   )

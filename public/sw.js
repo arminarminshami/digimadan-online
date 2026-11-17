@@ -5,12 +5,18 @@
  * - فقط فایل‌های هش‌دار /assets/ (که هیچ‌وقت تغییر نمی‌کنند) کش می‌شوند.
  * - اعلان‌ها (Web Push): نمایش اعلان و باز کردن صفحه‌ی مربوط با لمس آن.
  */
-const VERSION = 'dm-v2'
+// __BUILD_ID__ هنگام ساخت با شناسه‌ی انتشار جایگزین می‌شود (هر انتشار = یک سرویس‌ورکر تازه)
+const VERSION = 'dm-__BUILD_ID__'
 const STATIC_CACHE = `${VERSION}-static`
 const SHELL = ['/offline.html', '/icon-192.png', '/icon-512.png']
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(STATIC_CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()))
+  event.waitUntil(caches.open(STATIC_CACHE).then((c) => c.addAll(SHELL)))
+})
+
+// نسخه‌ی تازه منتظر می‌ماند تا کاربر در پنجره‌ی «به‌روزرسانی» تأیید کند
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting()
 })
 
 self.addEventListener('activate', (event) => {

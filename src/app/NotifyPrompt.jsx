@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import AppIcon from './AppIcons'
 import { useGuide } from './GuideContext'
+import { isUpdateOpen } from './overlays'
 import { enablePush, pushPermission, pushSupported } from './push'
 
 const DISMISS_KEY = 'dm_notify_dismissed_at'
@@ -46,7 +47,13 @@ export default function NotifyPrompt({ variant = 'user' }) {
       if (state === 'idle') setShow(false)
       return undefined
     }
-    const t = setTimeout(() => setShow(true), 1200)
+    let t
+    const tryShow = () => {
+      // اگر پنجره‌ی «به‌روزرسانی» باز است، بعداً دوباره تلاش می‌کنیم
+      if (isUpdateOpen()) t = setTimeout(tryShow, 2000)
+      else setShow(true)
+    }
+    t = setTimeout(tryShow, 1200)
     return () => clearTimeout(t)
   }, [eligible, guideOpen, state, welcomeKey])
 

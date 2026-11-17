@@ -16,6 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // وب‌اپلیکیشن: ثبت سرویس‌ورکر فقط روی سایت نهایی (نه در حالت توسعه)
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {})
+    navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch(() => {})
   })
 }

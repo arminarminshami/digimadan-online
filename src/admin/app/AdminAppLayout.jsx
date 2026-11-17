@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../AuthContext'
 import AppIcon from '../../app/AppIcons'
 import NotifyPrompt from '../../app/NotifyPrompt'
+import UpdatePrompt from '../../app/UpdatePrompt'
 import { GuideProvider, useGuide, useFirstRunWelcome } from '../../app/GuideContext'
 import { guideKeyForPath } from '../../app/guides'
 import { installGlobalHaptics } from '../../app/haptics'
@@ -126,6 +127,7 @@ function Shell({ children }) {
           ))}
         </nav>
 
+        <UpdatePrompt />
         <NotifyPrompt variant="admin" />
       </div>
     </AdminAppCtx.Provider>
