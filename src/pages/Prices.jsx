@@ -1,185 +1,136 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
-import { useAuth } from '../admin/AuthContext'
-import {
-  getAllPrices,
-  getPriceHistory,
-  getUserPriceFavorites,
-  togglePriceFavorite,
-  createPriceAlert,
-} from '../services/priceService'
-import { LoadingBlock, EmptyBlock } from '../components/StatusBlocks'
+import { getAllPrices, getPriceHistory } from '../services/priceService'
+import { useSeo } from '../lib/useSeo'
+import GoldOreCalculator from '../components/GoldOreCalculator'
+import { LoadingBlock } from '../components/StatusBlocks'
 import './Prices.css'
 
-function formatValue(item) {
-  const v = item.price_values?.[0] || item.price_values
-  if (!v || v.current_value == null) return '—'
-  return Number(v.current_value).toLocaleString('fa-IR') + (item.unit ? ` ${item.unit}` : '')
-}
+const GOLD_KEY = 'ir_gold_24k'
 
-function changePercent(item) {
-  const v = item.price_values?.[0] || item.price_values
-  return v?.change_percent ?? null
-}
+const fmt = (n, d = 0) => Number(n).toLocaleString('fa-IR', { maximumFractionDigits: d })
 
 export default function Prices() {
-  const { user, isAuthenticated } = useAuth()
-  const [items, setItems] = useState([])
-  const [favorites, setFavorites] = useState([])
-  const [selected, setSelected] = useState(null)
+  const location = useLocation()
+  const [gold, setGold] = useState(null)
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
-  const [alertValue, setAlertValue] = useState('')
-  const [alertDirection, setAlertDirection] = useState('above')
-  const [alertMessage, setAlertMessage] = useState(null)
+
+  useSeo({
+    title: 'قیمت طلا و ماشین‌حساب ارزش خاک طلا',
+    description:
+      'قیمت زنده هر گرم طلای ۲۴ عیار و ماشین‌حساب ارزش تقریبی خاک طلا بر اساس عیار (گرم در تن) در دیجی‌معدن.',
+    path: '/prices',
+  })
 
   useEffect(() => {
+    let alive = true
     getAllPrices()
-      .then((data) => {
-        setItems(data)
-        if (data.length > 0) setSelected(data[0])
+      .then((items) => {
+        if (!alive) return
+        const g = items.find((i) => i.key === GOLD_KEY) || null
+        setGold(g)
+        if (g) {
+          getPriceHistory(g.id, { days: 30 })
+            .then((rows) => {
+              if (!alive) return
+              // یک نقطه در هر روز (آخرین مقدار همان روز)
+              const byDay = new Map()
+              rows.forEach((h) => {
+                if (Number(h.value) > 0) byDay.set(new Date(h.recorded_at).toLocaleDateString('fa-IR'), Number(h.value))
+              })
+              setHistory([...byDay].map(([date, value]) => ({ date, value })))
+            })
+            .catch(() => {})
+        }
       })
-      .finally(() => setLoading(false))
-
-    if (isAuthenticated) {
-      getUserPriceFavorites(user.id).then(setFavorites)
+      .catch(() => {})
+      .finally(() => alive && setLoading(false))
+    return () => {
+      alive = false
     }
-  }, [isAuthenticated, user])
+  }, [])
 
+  // لینک مستقیم به ماشین‌حساب: /prices#calculator
   useEffect(() => {
-    if (!selected) return
-    getPriceHistory(selected.id, { days: 30 }).then((data) =>
-      setHistory(data.map((h) => ({ date: new Date(h.recorded_at).toLocaleDateString('fa-IR'), value: Number(h.value) })))
-    )
-  }, [selected])
+    if (loading || location.hash !== '#calculator') return
+    document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [loading, location.hash])
 
-  async function handleToggleFavorite(item) {
-    if (!isAuthenticated) return
-    const isFav = favorites.includes(item.id)
-    await togglePriceFavorite(user.id, item.id, isFav)
-    setFavorites((prev) => (isFav ? prev.filter((id) => id !== item.id) : [...prev, item.id]))
-  }
+  const v = gold?.price_values?.[0] || gold?.price_values || null
+  const price = Number(v?.current_value) || 0
+  const change = v?.change_percent != null ? Number(v.change_percent) : null
+  const updated = v?.updated_at || null
+  const ageHours = updated ? (Date.now() - new Date(updated).getTime()) / 3600e3 : null
+  const stale = ageHours != null && ageHours > 6
 
-  async function handleCreateAlert(e) {
-    e.preventDefault()
-    if (!isAuthenticated || !selected) return
-    await createPriceAlert({
-      authUserId: user.id,
-      priceItemId: selected.id,
-      targetValue: Number(alertValue),
-      direction: alertDirection,
-    })
-    setAlertMessage('هشدار قیمت ثبت شد.')
-    setAlertValue('')
-  }
+  const trend = useMemo(() => (change == null ? 'flat' : change > 0 ? 'up' : change < 0 ? 'down' : 'flat'), [change])
 
-  if (loading) return <LoadingBlock label="در حال بارگذاری قیمت‌ها..." />
-
-  const globalItems = items.filter((i) => i.category === 'global')
-  const iranianItems = items.filter((i) => i.category === 'iranian')
+  if (loading) return <LoadingBlock label="در حال بارگذاری قیمت طلا..." />
 
   return (
     <div className="container prices-page">
-      <h1 className="section-title">قیمت‌های لحظه‌ای</h1>
-      <p className="prices-page__subtitle">قیمت جهانی فلزات و انرژی، و قیمت بازار داخلی</p>
+      <h1 className="section-title">قیمت طلا و ماشین‌حساب خاک طلا</h1>
+      <p className="prices-page__subtitle">قیمت زنده‌ی هر گرم طلای ۲۴ عیار و تخمین ارزش خاک طلا از روی عیار</p>
 
-      <div className="prices-layout">
-        <div className="prices-list">
-          <h2 className="admin-section-title">بازار جهانی</h2>
-          {globalItems.map((item) => (
-            <PriceRow
-              key={item.id}
-              item={item}
-              isSelected={selected?.id === item.id}
-              isFavorite={favorites.includes(item.id)}
-              onSelect={() => setSelected(item)}
-              onToggleFavorite={() => handleToggleFavorite(item)}
-              showFavorite={isAuthenticated}
-            />
-          ))}
-
-          <h2 className="admin-section-title">بازار داخلی</h2>
-          {iranianItems.map((item) => (
-            <PriceRow
-              key={item.id}
-              item={item}
-              isSelected={selected?.id === item.id}
-              isFavorite={favorites.includes(item.id)}
-              onSelect={() => setSelected(item)}
-              onToggleFavorite={() => handleToggleFavorite(item)}
-              showFavorite={isAuthenticated}
-            />
-          ))}
-        </div>
-
-        <div className="prices-detail">
-          {selected && (
-            <>
-              <h2>{selected.label_fa}</h2>
-              <p className="prices-detail__value">{formatValue(selected)}</p>
-
-              {history.length > 1 ? (
-                <ResponsiveContainer width="100%" height={260}>
-                  <LineChart data={history}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                    <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                    <YAxis tick={{ fontSize: 11 }} />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="value" stroke="var(--color-copper)" strokeWidth={2} dot={false} />
-                  </LineChart>
-                </ResponsiveContainer>
-              ) : (
-                <EmptyBlock title="هنوز تاریخچه‌ای ثبت نشده" hint="با فعال شدن بروزرسانی خودکار قیمت، نمودار اینجا نمایش داده می‌شود." />
+      <section className="gold-price" aria-label="قیمت طلای ۲۴ عیار">
+        <span className="gold-price__label">قیمت هر گرم طلای ۲۴ عیار</span>
+        {price > 0 ? (
+          <>
+            <strong className="gold-price__value">
+              {fmt(price)} <small>تومان</small>
+            </strong>
+            {change != null && (
+              <span className={`gold-price__change gold-price__change--${trend}`}>
+                {trend === 'up' ? '▲' : trend === 'down' ? '▼' : '■'} {fmt(Math.abs(change), 2)}٪ نسبت به آخرین روز کاری
+              </span>
+            )}
+            <div className="gold-price__meta">
+              {Number(v?.day_low) > 0 && Number(v?.day_high) > 0 && (
+                <span>
+                  امروز: {fmt(v.day_low)} تا {fmt(v.day_high)}
+                </span>
               )}
-
-              {isAuthenticated && (
-                <form className="prices-detail__alert-form" onSubmit={handleCreateAlert}>
-                  <span>هشدار وقتی قیمت</span>
-                  <select value={alertDirection} onChange={(e) => setAlertDirection(e.target.value)}>
-                    <option value="above">بالاتر از</option>
-                    <option value="below">پایین‌تر از</option>
-                  </select>
-                  <input
-                    type="number"
-                    placeholder="مقدار"
-                    value={alertValue}
-                    onChange={(e) => setAlertValue(e.target.value)}
-                    required
-                  />
-                  <button type="submit" className="btn btn-outline btn-sm">ثبت هشدار</button>
-                </form>
+              {updated && (
+                <span>
+                  آخرین به‌روزرسانی: {new Date(updated).toLocaleDateString('fa-IR')} ساعت{' '}
+                  {new Date(updated).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' })}
+                </span>
               )}
-              {alertMessage && <p className="prices-detail__alert-success">{alertMessage}</p>}
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+            {stale && <p className="gold-price__warn">قیمت چند ساعت است به‌روز نشده؛ ممکن است با بازار تفاوت داشته باشد.</p>}
+          </>
+        ) : (
+          <p className="gold-price__warn">قیمت طلا فعلاً در دسترس نیست. می‌توانید قیمت را در ماشین‌حساب خودتان وارد کنید.</p>
+        )}
+      </section>
+
+      <GoldOreCalculator pricePerGram={price} updatedAt={updated} />
+
+      {history.length > 1 && (
+        <section className="gold-chart" aria-label="نمودار قیمت طلا">
+          <h2>روند قیمت طلای ۲۴ عیار (۳۰ روز اخیر)</h2>
+          <div dir="ltr">
+          <ResponsiveContainer width="100%" height={240}>
+            <LineChart data={history}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E2DCCB" />
+              <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+              <YAxis
+                tick={{ fontSize: 11 }}
+                domain={['auto', 'auto']}
+                width={56}
+                tickFormatter={(x) => fmt(x / 1e6, 1) + 'م'}
+              />
+              <Tooltip formatter={(x) => [fmt(x) + ' تومان', 'قیمت']} />
+              <Line type="monotone" dataKey="value" stroke="#C2703D" strokeWidth={2.4} dot={false} isAnimationActive={false} />
+            </LineChart>
+          </ResponsiveContainer>
+          </div>
+        </section>
+      )}
+
+      <p className="gold-source">منبع قیمت: بازار آزاد طلا (به‌روزرسانی خودکار هر چند دقیقه). قیمت‌ها تقریبی و راهنما هستند.</p>
     </div>
-  )
-}
-
-function PriceRow({ item, isSelected, isFavorite, onSelect, onToggleFavorite, showFavorite }) {
-  const change = changePercent(item)
-  return (
-    <button className={'price-row' + (isSelected ? ' price-row--active' : '')} onClick={onSelect}>
-      <span className="price-row__label">{item.label_fa}</span>
-      <span className="price-row__value">{formatValue(item)}</span>
-      {change != null && (
-        <span className={'price-row__change ' + (change >= 0 ? 'price-row__change--up' : 'price-row__change--down')}>
-          {change >= 0 ? '+' : ''}{change}%
-        </span>
-      )}
-      {showFavorite && (
-        <span
-          className={'price-row__star' + (isFavorite ? ' price-row__star--active' : '')}
-          onClick={(e) => {
-            e.stopPropagation()
-            onToggleFavorite()
-          }}
-        >
-          ★
-        </span>
-      )}
-    </button>
   )
 }

@@ -21,7 +21,7 @@ const ADS_MENU = [
 ]
 
 const MORE_MENU = [
-  { to: '/prices', label: 'قیمت‌های بازار', hint: 'قیمت لحظه‌ای فلزات و ارز', icon: 'chart' },
+  { to: '/prices', label: 'قیمت طلا و ماشین‌حساب', hint: 'قیمت زنده طلا و ارزش خاک طلا', icon: 'chart' },
   { to: '/news', label: 'اخبار', hint: 'تازه‌ترین اخبار معدن و فلزات', icon: 'news' },
   { to: '/articles', label: 'مقالات', hint: 'مقالات تخصصی صنعت معدن', icon: 'article' },
   { to: '/about', label: 'درباره ما', hint: 'با دیجی‌معدن آشنا شوید', icon: 'info' },

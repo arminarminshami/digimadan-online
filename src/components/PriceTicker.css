@@ -57,3 +57,53 @@
     overflow-x: auto;
   }
 }
+
+/* نسخه‌ی تک‌قیمتی (فقط طلا): ثابت و وسط‌چین، بدون حرکت */
+.price-ticker--gold {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  padding: 7px 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.price-ticker--gold .price-ticker__label {
+  font-size: 0.74rem;
+  opacity: 0.85;
+}
+
+.price-ticker--gold .price-ticker__value {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #f0c04a;
+}
+
+.price-ticker--gold .price-ticker__change {
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.price-ticker--gold .price-ticker__change--up {
+  color: #7fd19b;
+}
+
+.price-ticker--gold .price-ticker__change--down {
+  color: #f08f83;
+}
+
+.price-ticker--gold .price-ticker__cta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+@media (max-width: 520px) {
+  .price-ticker--gold .price-ticker__cta {
+    display: none;
+  }
+}

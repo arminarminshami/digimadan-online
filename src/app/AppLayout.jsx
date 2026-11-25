@@ -14,7 +14,7 @@ import './AppLayout.css'
 const TITLES = {
   '/ads': 'آگهی‌ها',
   '/auctions': 'مزایده‌ها',
-  '/prices': 'قیمت‌های بازار',
+  '/prices': 'قیمت طلا و ماشین‌حساب',
   '/news': 'اخبار',
   '/articles': 'مقالات',
   '/lab-equipment': 'تجهیزات آزمایشگاهی',

@@ -89,3 +89,73 @@
     scroll-snap-align: start;
   }
 }
+
+/* قیمت طلا و ماشین‌حساب در صفحه‌ی اصلی */
+.home-gold {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10px;
+}
+
+.home-gold__price,
+.home-gold__calc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  min-width: 0;
+}
+
+.home-gold__price {
+  color: #f6f3ec;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 192, 74, 0.28), transparent 55%),
+    linear-gradient(180deg, #2a2825, #1c1b19);
+}
+
+.home-gold__label {
+  font-size: 0.74rem;
+  color: #d8d2c3;
+}
+
+.home-gold__value {
+  font-size: clamp(1.1rem, 4.6vw, 1.5rem);
+  font-weight: 800;
+  color: #f0c04a;
+  white-space: nowrap;
+}
+
+.home-gold__change {
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.home-gold__change--up {
+  color: #7fd19b;
+}
+
+.home-gold__change--down {
+  color: #f08f83;
+}
+
+.home-gold__calc {
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #de9159, #b5602d);
+  box-shadow: 0 8px 18px rgba(194, 112, 61, 0.3);
+}
+
+.home-gold__calc small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+@media (max-width: 480px) {
+  .home-gold {
+    grid-template-columns: 1fr;
+  }
+}

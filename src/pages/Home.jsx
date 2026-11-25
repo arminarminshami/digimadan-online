@@ -6,7 +6,7 @@ import LatestAdsPager from '../components/LatestAdsPager'
 import DepthSection from '../components/DepthSection'
 import GlobalSearchBar from '../components/GlobalSearchBar'
 import { EmptyBlock } from '../components/StatusBlocks'
-import { AD_CATEGORIES, HOME_MAIN_PRICE_KEYS, HOME_METAL_PRICE_KEYS } from '../lib/constants'
+import { AD_CATEGORIES } from '../lib/constants'
 import { useSeo, SITE_URL, SITE_NAME } from '../lib/useSeo'
 import './Home.css'
 import './HomeCompact.css'
@@ -52,13 +52,6 @@ function formatPriceValue(item) {
 function priceChangePercent(item) {
   const v = item.price_values?.[0] || item.price_values
   return v?.change_percent ?? null
-}
-
-// ترتیب و انتخاب دقیق آیتم‌های صفحه‌ی اصلی از constants.js می‌آید تا با
-// نوار قیمت بالای هدر سایت (PriceTicker.jsx) دقیقاً یکسان بماند.
-function pickOrderedPrices(prices, keys) {
-  const byKey = Object.fromEntries(prices.map((p) => [p.key, p]))
-  return keys.map((k) => byKey[k]).filter(Boolean)
 }
 
 export default function Home() {
@@ -200,49 +193,31 @@ export default function Home() {
 
       <div className="strata-seam" />
 
-      {/* Live prices — جدول فشرده تا آگهی‌های تازه سریع‌تر دیده شوند */}
+      {/* قیمت زنده‌ی طلای ۲۴ عیار + ماشین‌حساب خاک طلا (فقط طلا؛ بقیه‌ی قیمت‌ها حذف شده) */}
       <DepthSection className="section home-prices-compact" depth={0.9}>
         <div className="container">
-          <div className="home-prices-compact__head">
-            <h2 className="home-prices-compact__title">
-              <span className="home-prices-compact__dot" aria-hidden="true" />
-              جدول قیمت‌های بازار
-            </h2>
-            <Link to="/prices" className="section-link">
-              جزئیات و نمودار ←
-            </Link>
-          </div>
-
-          {!loading && prices.length === 0 && (
-            <EmptyBlock title="هنوز قیمتی ثبت نشده" hint="به‌زودی قیمت‌ها اضافه خواهند شد." />
-          )}
-
-          {!loading && prices.length > 0 && (
-            <div className="home-price-grid">
-              {pickOrderedPrices(prices, [...HOME_MAIN_PRICE_KEYS, ...HOME_METAL_PRICE_KEYS]).map((item) => {
-                const change = priceChangePercent(item)
-                return (
-                  <div key={item.id} className="home-price-card">
-                    <span className="home-price-card__top">
-                      <span className="home-price-card__label">{item.label_fa}</span>
-                      {change != null && (
-                        <span
-                          className={
-                            'home-price-card__change ' +
-                            (change >= 0 ? 'home-price-card__change--up' : 'home-price-card__change--down')
-                          }
-                        >
-                          {change >= 0 ? '+' : ''}
-                          {change}%
-                        </span>
-                      )}
+          {(() => {
+            const gold = prices.find((p) => p.key === 'ir_gold_24k')
+            if (loading || !gold) return null
+            const change = priceChangePercent(gold)
+            return (
+              <div className="home-gold">
+                <Link to="/prices" className="home-gold__price">
+                  <span className="home-gold__label">{gold.label_fa}</span>
+                  <span className="home-gold__value">{formatPriceValue(gold)}</span>
+                  {change != null && (
+                    <span className={'home-gold__change ' + (change >= 0 ? 'home-gold__change--up' : 'home-gold__change--down')}>
+                      {change >= 0 ? '▲' : '▼'} {Math.abs(change).toLocaleString('fa-IR', { maximumFractionDigits: 2 })}٪
                     </span>
-                    <span className="home-price-card__value">{formatPriceValue(item)}</span>
-                  </div>
-                )
-              })}
-            </div>
-          )}
+                  )}
+                </Link>
+                <Link to="/prices#calculator" className="home-gold__calc">
+                  ماشین‌حساب ارزش خاک طلا
+                  <small>عیار را بدهید، قیمت تقریبی را ببینید</small>
+                </Link>
+              </div>
+            )
+          })()}
         </div>
       </DepthSection>
 

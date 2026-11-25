@@ -1,0 +1,235 @@
+.gold-calc {
+  margin-top: 22px;
+  padding: 20px 18px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 6px 22px rgba(28, 27, 25, 0.06);
+  scroll-margin-top: 90px;
+}
+
+.gold-calc__head h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.gold-calc__head p {
+  margin: 0 0 16px;
+  font-size: 0.86rem;
+  line-height: 1.9;
+  color: var(--color-ink-soft);
+}
+
+.gold-calc__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gold-calc__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.gold-calc__field--main,
+.gold-calc__field--wide {
+  grid-column: 1 / -1;
+}
+
+.gold-calc__field > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.gold-calc__field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-bg);
+  font-family: inherit;
+  font-size: 16px; /* جلوگیری از زوم خودکار آیفون */
+  color: var(--color-ink);
+  text-align: start;
+}
+
+.gold-calc__field--main input {
+  min-height: 54px;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.gold-calc__field input:focus {
+  outline: none;
+  border-color: var(--color-copper);
+  box-shadow: 0 0 0 3px rgba(194, 112, 61, 0.18);
+}
+
+.gold-calc__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gold-calc__chips button {
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg);
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+}
+
+.gold-calc__chips button:active {
+  background: rgba(194, 112, 61, 0.14);
+  color: var(--color-copper-dark);
+}
+
+.gold-calc__live {
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #2e8b4f;
+  background: rgba(46, 139, 79, 0.12);
+}
+
+.gold-calc__reset {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-copper-dark);
+  cursor: pointer;
+}
+
+.gold-calc__warn {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(217, 162, 27, 0.14);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: #7a5b06;
+}
+
+.gold-calc__hint {
+  margin: 16px 0 0;
+  padding: 14px;
+  border: 1.5px dashed var(--color-border);
+  border-radius: 14px;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--color-ink-soft);
+}
+
+.gold-calc__result {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gold-calc__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 12px;
+  text-align: center;
+  border-radius: 18px;
+  color: #f6f3ec;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(194, 112, 61, 0.4), transparent 60%),
+    linear-gradient(180deg, #2a2825, #1c1b19);
+}
+
+.gold-calc__main small {
+  font-size: 0.74rem;
+  color: #cfc9ba;
+}
+
+.gold-calc__main strong {
+  font-size: clamp(1.35rem, 6vw, 1.9rem);
+  font-weight: 800;
+  color: #f0c04a;
+}
+
+.gold-calc__main span {
+  font-size: 0.74rem;
+  color: #bdb7a8;
+}
+
+.gold-calc__rows {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gold-calc__rows > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: var(--color-bg);
+}
+
+.gold-calc__rows dt {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.gold-calc__rows dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: end;
+}
+
+.gold-calc__rec {
+  background: rgba(194, 112, 61, 0.1) !important;
+}
+
+.gold-calc__cta {
+  width: 100%;
+  justify-content: center;
+}
+
+.gold-calc__note {
+  margin: 14px 0 0;
+  font-size: 0.74rem;
+  line-height: 1.9;
+  color: var(--color-ink-soft);
+}
+
+@media (min-width: 720px) {
+  .gold-calc {
+    padding: 26px 28px;
+  }
+  .gold-calc__fields {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .gold-calc__field--main {
+    grid-column: 1 / 2;
+  }
+  .gold-calc__field--wide {
+    grid-column: 1 / -1;
+  }
+}

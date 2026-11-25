@@ -9,7 +9,8 @@ const SECTIONS = [
     tiles: [
       { to: '/ads', label: 'همه آگهی‌ها', icon: 'list', color: '#3E7CB1' },
       { to: '/auctions', label: 'مزایده‌ها', icon: 'gavel', color: '#B5483A' },
-      { to: '/prices', label: 'قیمت‌های بازار', icon: 'chart', color: '#2E8B7A' },
+      { to: '/prices', label: 'قیمت طلا', icon: 'chart', color: '#2E8B7A' },
+      { to: '/prices#calculator', label: 'ماشین‌حساب خاک طلا', icon: 'calc', color: '#D9A21B' },
       { to: '/minerals', label: 'مواد معدنی', icon: 'gem', color: '#C2703D' },
       { to: '/lab-equipment', label: 'تجهیزات آزمایشگاهی', icon: 'flask', color: '#8E5BB5' },
     ],

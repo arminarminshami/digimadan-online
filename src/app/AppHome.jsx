@@ -16,7 +16,7 @@ export const HOME_TILES = [
   { to: '/ads?category=mining_machinery', label: 'ماشین‌آلات معدنی', icon: 'wrench', color: '#D9822B' },
   { to: '/lab-equipment', label: 'تجهیزات آزمایشگاهی', icon: 'flask', color: '#8E5BB5' },
   { to: '/auctions', label: 'مزایده‌ها', icon: 'gavel', color: '#B5483A' },
-  { to: '/prices', label: 'قیمت‌های بازار', icon: 'chart', color: '#2E8B7A' },
+  { to: '/prices', label: 'قیمت طلا و ماشین‌حساب', icon: 'calc', color: '#2E8B7A' },
   { to: '/news', label: 'اخبار', icon: 'news', color: '#3A6EA5' },
 ]
 
