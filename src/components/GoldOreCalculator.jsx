@@ -5,27 +5,38 @@ import './GoldOreCalculator.css'
 const FA = '۰۱۲۳۴۵۶۷۸۹'
 const AR = '٠١٢٣٤٥٦٧٨٩'
 
-// ارقام فارسی/عربی و جداکننده‌ها را به عدد معمولی تبدیل می‌کند
+// ارقام فارسی/عربی را به عدد معمولی تبدیل می‌کند.
+// جداکننده‌ها: «٫» و «/» همیشه اعشار؛ ویرگول (, ، ٬) اگر الگوی هزارگان درست باشد (۳۴,۰۷۲,۳۰۰) هزارگان
+// و در غیر این صورت اعشار است (۳،۵ یا 3,5 یعنی ۳٫۵) تا عدد ده‌برابر خوانده نشود.
 function parseNum(s) {
   if (s == null) return NaN
-  const t = String(s)
+  let t = String(s)
     .replace(/[۰-۹]/g, (d) => FA.indexOf(d))
     .replace(/[٠-٩]/g, (d) => AR.indexOf(d))
-    .replace(/[٬,،\s]/g, '')
-    .replace(/٫/g, '.')
+    .replace(/[\s\u200c]/g, '')
+    .replace(/[٫/]/g, '.')
+  if (/[,،٬]/.test(t)) {
+    if (/^\d{1,3}([,،٬]\d{3})+(\.\d+)?$/.test(t)) t = t.replace(/[,،٬]/g, '')
+    else t = t.replace(/[,،٬]/, '.')
+  }
   return t === '' ? NaN : Number(t)
 }
 
 const fmt = (n, digits = 0) => Number(n).toLocaleString('fa-IR', { maximumFractionDigits: digits })
 
-// «۱۲۳ میلیون تومان» برای خواناتر شدن عددهای بزرگ
+// «۱۱۹ میلیون و ۲۵۳ هزار تومان»: خوانا و بدون ممیز اعشار مبهم (گرد‌شده تا هزار تومان)
 function toWords(n) {
   if (!Number.isFinite(n)) return ''
-  const abs = Math.abs(n)
-  if (abs >= 1e12) return `${fmt(n / 1e12, 2)} هزار میلیارد تومان`
-  if (abs >= 1e9) return `${fmt(n / 1e9, 2)} میلیارد تومان`
-  if (abs >= 1e6) return `${fmt(n / 1e6, 2)} میلیون تومان`
-  return `${fmt(n)} تومان`
+  const v = Math.round(Math.abs(n) / 1000) * 1000
+  if (v < 1000) return `${fmt(Math.round(Math.abs(n)))} تومان`
+  const parts = []
+  const b = Math.floor(v / 1e9)
+  const m = Math.floor((v % 1e9) / 1e6)
+  const k = Math.floor((v % 1e6) / 1e3)
+  if (b) parts.push(`${fmt(b)} میلیارد`)
+  if (m) parts.push(`${fmt(m)} میلیون`)
+  if (k) parts.push(`${fmt(k)} هزار`)
+  return parts.join(' و ') + ' تومان'
 }
 
 const PRESETS = [1, 2, 5, 10]
@@ -136,7 +147,10 @@ export default function GoldOreCalculator({ pricePerGram, updatedAt }) {
           <div className="gold-calc__main">
             <small>ارزش تقریبی خاک (قبل از بازیابی)</small>
             <strong>{toWords(r.total)}</strong>
-            <span>{fmt(r.total)} تومان برای {fmt(r.t, 2)} تن</span>
+            <span>{fmt(Math.round(r.total))} تومان</span>
+            <span className="gold-calc__eq" dir="rtl">
+              {fmt(r.g, 3)} گرم در تن × {fmt(r.t, 3)} تن × {fmt(r.p)} تومان
+            </span>
           </div>
 
           <dl className="gold-calc__rows">
